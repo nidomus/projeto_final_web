@@ -8,7 +8,8 @@
 <h1>Tecnologias</h1>
 
 <ul>
-<li>1. Php;</li>
-<li>2. Mysql;</li>
-<li>3. Javascript;</li>
+<li>Php;</li>
+<li>Mysql;</li>
+<li>Javascript;</li>
+<li>Bulma.</li>
 </ol>
