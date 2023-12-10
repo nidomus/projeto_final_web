@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Acesso à página</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@6.5.95/css/materialdesignicons.min.css" />
+  <style>
+    @import '../assets/css/selecionar_projeto.css';
+    @import '../assets/css/background.css';
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bulma-toast/2.4.0/bulma-toast.min.js"
+    integrity="sha512-mmZ7OjPwzgwFPe24uCirB6KvFtUHJqpeHo8cTyWpAvdesiGFRYHDnUKajPt3iWyhaDZ66KTXokBO/Z2kUPTxEw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body>
+
+
+  <section class="hero is-fullheight">
+    <div class="hero-body ">
+      <div class="container has-text-centered">
+
+        <div class="column is-4-desktop pt-0 mt-0 is-offset-4 is-offset-0-touch" id="login_box">
+          <div class="box p-6 ml-3 mr-3">
+            <div class="level">
+              <div class="level-item">
+                <figure class="image">
+                  <img class=" is-rounded p-1 " id="foto_usuario" alt="Foto do Usuário">
+                </figure>
+              </div>
+            </div>
+
+            <p class="title has-text-centered has-text-dark mb-6" id="saudacao">Olá, </p>
+
+            <p class="subtitle has-text-centered mb-2">Escolha um Projeto</p>
+            <hr class="mt-0">
+
+            <div class="columns is-multiline" id="projetos">
+
+            </div>
+
+
+
+
+            <br>
+            <br>
+            <br>
+            <button class="button is-danger is-medium is-rounded" onclick="sair()">
+              <span class="icon-text">
+
+                <span class="has-text-weight-bold">Desconectar</span>
+                <i class="mdi mdi-exit-to-app icon"></i>
+              </span>
+
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    </div>
+  </section>
+  <script>
+
+    let projetos
+    let usuario = JSON.parse(localStorage.getItem("Usuario"))
+
+    xhttp = new XMLHttpRequest();
+    xhttp.onload = function () {
+      console.log(this.responseText);
+      resposta = JSON.parse(this.responseText);
+      if (resposta.erro == 0) {
+        projetos = resposta.projetos;
+        carregarProjetos();
+      }
+      else {
+        bulmaToast.toast({
+          message: 'E-mail ou senha incorretos!',
+          type: 'is-danger'
+        })
+      }
+    };
+    xhttp.open("GET", "./../controle/getProjetosEmail.php", true);
+    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttp.send();
+
+
+    document.getElementById('saudacao').innerText += '    ' + usuario.nome.split(' ')[0]
+    document.getElementById('foto_usuario').src = './../' + usuario.foto
+
+
+    function carregarProjetos() {
+
+      const columns = document.getElementById('projetos')
+
+      projetos.forEach(projeto => {
+
+        var column = document.createElement('div')
+        column.classList.add('column', 'is-12', 'projeto', 'mb-3', 'is-clickable')
+
+        var texto = document.createElement('p')
+        texto.classList.add('level', 'is-mobile')
+
+
+        var nome = document.createElement('span')
+        nome.innerText = projeto.nome
+        nome.classList.add('has-text-left', 'level-left')
+
+        var cargo = document.createElement('span')
+        cargo.innerText = projeto.cargo
+        cargo.classList.add('has-text-right', 'level-right')
+
+        texto.append(nome)
+        texto.append(cargo)
+
+        column.append(texto)
+
+        columns.append(column)
+      });
+
+    }
+
+    function sair() {
+      localStorage.removeItem("Usuario");
+      xhttp = new XMLHttpRequest();
+      xhttp.onload = function () {
+        console.log(this.responseText);
+      };
+      xhttp.open("GET", "./../controle/sair.php", true);
+      xhttp.send();
+      location.href = './login.html';
+    }
+
+  </script>
+</body>
+
+</html>

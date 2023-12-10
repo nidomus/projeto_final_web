@@ -1,6 +1,6 @@
 <?php
-require_once $_SERVER["DOCUMENT_ROOT"] . "/login/modelo/Usuario.php";
-require_once $_SERVER["DOCUMENT_ROOT"] . "/login/persistencia/UsuarioBD.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/projeto_final_web/modelo/Usuario.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/projeto_final_web/persistencia/UsuarioBD.php";
 
 $ubd = new UsuarioBD();
 

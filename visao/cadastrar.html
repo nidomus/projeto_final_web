@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Acesso à página</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@6.5.95/css/materialdesignicons.min.css" />
+  <style>
+    @import '../assets/css/cadastrar.css';
+    @import '../assets/css/background.css';
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bulma-toast/2.4.0/bulma-toast.min.js"
+    integrity="sha512-mmZ7OjPwzgwFPe24uCirB6KvFtUHJqpeHo8cTyWpAvdesiGFRYHDnUKajPt3iWyhaDZ66KTXokBO/Z2kUPTxEw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body>
+
+
+  <section class="hero is-fullheight">
+    <div class="hero-body">
+      <div class="container has-text-centered">
+
+        <div class="info column is-4  is-offset-4 is-offset-0-touch" id="login_box">
+
+          <div class="info-inner" id="info-inner">
+
+            <div class=" info-front">
+
+              <div class=" box p-6">
+                <p class="title has-text-centered">Cadastrar-se</p>
+                <hr>
+                <form action="#" id="formCadastro" onsubmit="return validarDados(this)">
+                  <div class="field">
+                    <div class="control">
+                      <input type="email" required class="input is-rounded is-medium" id="email" placeholder="Email"
+                        name="email">
+                    </div>
+                  </div>
+
+                  <div class="field">
+                    <div class="control">
+                      <input type="password" required class="input is-rounded is-medium" id="senha1" placeholder="Senha"
+                        name="senha_1">
+                    </div>
+                  </div>
+
+                  <div class="field">
+                    <div class="control">
+                      <input type="password" required class="input is-rounded is-medium" id="senha2"
+                        placeholder="Repita sua senha" name="senha_2">
+                    </div>
+                  </div>
+                  <p class="help is-danger" id="texto_ajuda"></p>
+                  <br>
+                  <button type="submit" class="submit-button button is-fullwidth is-rounded is-medium">
+                    <span class="icon-text">
+                      <span class="icon mdi mdi-skip-forward"></span>
+                      <span>Continuar</span>
+                    </span>
+                  </button>
+                  <br>
+                  <div class="level">
+                    <div class="level-item">
+                      <a href="../visao/login.html">Já tenho uma conta</a>
+                    </div>
+
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class=" info-back">
+
+              <div class=" box p-6">
+
+                <form action="#" id="formPerfil" onsubmit="return cadastrar(this)">
+
+                  <div class="level">
+                    <div class="level-item">
+                      <figure class="image">
+                        <img class=" is-rounded p-1 " id="foto_usuario"
+                          src="../assets/imagens/usuarios/user_default.jpg" alt="">
+                      </figure>
+                    </div>
+                  </div>
+
+                  <div class="level">
+                    <div class="level-item">
+                      <input type="file" class="inputfile" nome="foto" oninput="alterarFoto(this)" id="foto">
+
+                      <label for="foto">
+                        <span class="text-icon">
+
+                          <i class="icon mdi mdi-camera"></i>
+                          <span>Upload</span>
+
+                        </span>
+                      </label>
+
+                    </div>
+                  </div>
+
+
+
+                  <div class="field">
+
+                    <div class="control">
+                      <input type="text" class="input is-medium is-rounded has-text-centered" id="nome"
+                        placeholder="Insira seu nome" name="nome">
+                    </div>
+                  </div>
+
+
+                  <br>
+                  <button type="submit" class="submit-button button is-fullwidth is-rounded is-primary is-medium">
+                    <span class="icon-text">
+                      <span class="icon"><i class="mdi mdi-login"></i></span>
+                      <span>Cadastrar-se</span>
+                    </span>
+
+                  </button>
+                  <br>
+                  <div class="columns is-multiline">
+                    <div class="column is-12 is-12-touch">
+                      <a onclick="alternarFormulario(this)">Voltar</a>
+                    </div>
+
+                  </div>
+                </form>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="head-foot has-text-centered mb-6">
+      <a href="https://github.com/nidomus/projeto_final_web" target=”_blank”>
+        <i class=" mdi mdi-github has-text-light is-size-1"></i>
+      </a>
+      <a href="https://linkedin.com/in/herbert-oliveira-a99022215" target="_blank">
+        <i class=" mdi mdi-linkedin has-text-light is-size-1"></i>
+      </a>
+    </div>
+  </section>
+  <script>
+
+    let dados1;
+    let foto;
+
+    function cadastrar(formulario) {
+      xhttp = new XMLHttpRequest();
+      xhttp.onload = function () {
+
+        var nome_arquivo = this.responseText
+
+        nome_arquivo = nome_arquivo.replace(/(\r\n|\n|\r)/gm, "")
+
+
+        uploadFoto(nome_arquivo);
+
+        location.href = './login.html';
+
+        // resposta = JSON.parse(this.responseText);
+        // if (resposta.erro == 0) {
+        //   localStorage.setItem("Usuario", resposta.usuario);
+        //   console.log(resposta.usuario);
+        //   location.href = './../index.html';
+        // }
+        // else {
+        //   alert('Ocorreu algum erro!')
+        // }
+      };
+      xhttp.open("POST", "./../controle/cadastrar.php", true);
+      xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+      dados = new FormData(formulario);
+
+      dados.append('email', dados1.get('email'))
+      dados.append('senha', dados1.get('senha_1'))
+
+      try {
+        dados.append('foto', foto.name)
+
+      } catch (error) {
+        dados.append('foto', null)
+      }
+
+      // console.log(new URLSearchParams(dados).toString());
+      xhttp.send(new URLSearchParams(dados).toString());
+
+      return false;
+
+    }
+
+    async function uploadFoto(nome) {
+
+      const form = new FormData()
+      form.append('file', foto)
+      form.append('nome', nome)
+      await fetch('./../controle/upload.php', {
+        method: "POST",
+        body: form
+      });
+
+    }
+
+    function alternarFormulario() {
+
+      var innerInfo = document.getElementById('info-inner')
+
+      if (innerInfo.classList.contains('rotate')) {
+        innerInfo.classList.remove('rotate')
+      } else {
+        innerInfo.classList.add('rotate')
+      }
+
+
+    }
+
+    function alterarFoto(input) {
+
+      foto = input.files[0]
+      const preview = document.getElementById('foto_usuario')
+      const reader = new FileReader();
+
+      reader.addEventListener("load", () => {
+
+        preview.src = reader.result;
+      }, false);
+
+      if (foto) {
+        reader.readAsDataURL(foto);
+      }
+
+      // const form = new FormData()
+      // form.append('file', foto)
+      // await fetch('./../controle/upload.php', {
+      //   method: "POST",
+      //   body: form
+      // });
+
+    }
+
+    function validarDados(formulario) {
+
+      dados1 = new FormData(formulario)
+
+      email = dados1.get('email')
+      senha1 = dados1.get('senha_1')
+      senha2 = dados1.get('senha_2')
+
+      if (senha1 !== senha2) {
+
+        document.getElementById('texto_ajuda').innerText = "As senhas informadas não são iguais."
+        document.getElementById('senha1').classList.add('is-danger')
+        document.getElementById('senha2').classList.add('is-danger')
+
+      } else {
+        document.getElementById('texto_ajuda').innerText = ""
+        document.getElementById('senha1').classList.remove('is-danger')
+        document.getElementById('senha2').classList.remove('is-danger')
+        alternarFormulario();
+
+      }
+
+      return false;
+
+
+
+    }
+
+  </script>
+</body>
+
+</html>

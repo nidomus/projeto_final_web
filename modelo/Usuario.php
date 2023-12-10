@@ -4,12 +4,14 @@ class Usuario
     private $name;
     private $email;
     private $password;
+    private $foto;
 
-    public function __construct($name, $email, $password)
+    public function __construct($name, $email, $password, $foto)
     {
         $this->name = $name;
         $this->email = $email;
         $this->password = md5($password);
+        $this->foto = $foto;
     }
 
     public function getName()
@@ -35,6 +37,16 @@ class Usuario
     public function setEmail($email)
     {
         $this->email = $email;
+    }
+
+    public function setFoto($foto)
+    {
+        $this->foto = $foto;
+    }
+
+    public function getFoto()
+    {
+        return $this->foto;
     }
 
     public function setPassword($password)

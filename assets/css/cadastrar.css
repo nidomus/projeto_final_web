@@ -1,0 +1,89 @@
+.box {
+    border-radius: 50px !important;
+    box-shadow: 5px 6px 10px #8a2be2 !important;
+}
+
+.submit-button {
+    background-color: blueviolet !important;
+    color: white !important;
+}
+
+
+.rotate {
+    transform: rotateY(180deg);
+}
+
+.info-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+
+}
+
+
+.info {
+
+    perspective: 1000px;
+    height: 10rem;
+    transition: transform 0.8s;
+    backface-visibility: hidden;
+
+
+}
+
+.info-front {
+    background-color: white;
+    border-radius: 50px;
+    transform: translate(0, -130%);
+    box-shadow: 0 0 5px 0 gray;
+}
+
+.info-back {
+    background-color: white !important;
+    transform: rotateY(180deg) translate(0, -130%);
+    border-radius: 50px;
+    box-shadow: 0 0 5px 0 gray;
+
+}
+
+#foto_usuario {
+
+    border: #8a2be2 3px solid;
+    height: 150px;
+    width: 150px;
+}
+
+.inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+
+}
+
+.inputfile+label {
+
+    background-color: black;
+    color: white;
+    padding: 10px 20px 10px 15px;
+    cursor: pointer;
+    border-radius: 999px;
+}
+
+.inputfile:focus+label,
+.inputfile+label:hover {
+    background-color: gray;
+    color: black;
+}
+
+.info-front,
+.info-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+}

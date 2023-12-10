@@ -1,0 +1,27 @@
+Objetivo:
+
+Projetar um sistema web de pequeno porte utilizando boas práticas de padrão de projetos orientados a objetos e entregar o código referente a um sprint do projeto.
+
+Requisitos do projeto:
+
+    [] Ter dois níveis de usuário com diferentes perfis de acesso ou informações 
+    personalizadas para cada usuário;
+
+    [] Possuir pelo menos um relacionamento entre classes do tipo 1xm ou n x m;
+
+    [] Utilizar herança (opcional);
+
+    [OK] Utilizar upload e armazenamento de arquivos;
+
+    [] Utilizar interfaces com usuário dentro de padrões de acessibilidade;
+
+Artefatos a serem entregues:
+
+    Documento de requisitos simplificado ou diagrama de casos de uso;
+
+    Código fonte da aplicação com instruções de instalação;
+
+    Link para a página em alguma hospedagem web;
+
+Apresentação dos projetos: 13 e 14 de Dezembro com entrega dos artefatos e 
+explicação da estrutura do projeto.

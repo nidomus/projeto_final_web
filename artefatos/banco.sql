@@ -1,5 +1,6 @@
-CREATE DATABASE login;
-USE login;
+CREATE DATABASE projeto_final;
+
+USE projeto_final;
 
 
 CREATE TABLE Usuarios (

@@ -1,0 +1,9 @@
+.box {
+    border-radius: 50px !important;
+    box-shadow: 5px 6px 10px #8a2be2 !important;
+}
+
+.submit-button {
+    background-color: blueviolet !important;
+    color: white !important;
+}

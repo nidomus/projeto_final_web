@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Acesso à página</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@6.5.95/css/materialdesignicons.min.css" />
+  <style>
+    @import '../assets/css/login.css';
+    @import '../assets/css/background.css';
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bulma-toast/2.4.0/bulma-toast.min.js"
+    integrity="sha512-mmZ7OjPwzgwFPe24uCirB6KvFtUHJqpeHo8cTyWpAvdesiGFRYHDnUKajPt3iWyhaDZ66KTXokBO/Z2kUPTxEw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+  <script>
+
+    if (localStorage.getItem("Usuario") !== null) {
+      location.href = history.back();
+    }
+  </script>
+
+</head>
+
+<body>
+
+
+  <section class="hero is-fullheight">
+    <div class="hero-body ">
+      <div class="container has-text-centered">
+
+        <div class="column is-4  is-offset-4 is-offset-0-touch" id="login_box">
+
+          <div class="box p-6">
+            <p class="title has-text-centered mb-0 is-size-2 icon-text">
+
+              <span>Sprint King</span>
+              <i class="icon mdi mdi-crown has-text-warning"></i>
+
+            </p>
+            <hr>
+            <form action="#" id="formLogin" onsubmit="return autenticar(this)">
+              <div class="field">
+                <!-- <label class="label has-text-left" for="email">Email:</label> -->
+                <div class="control">
+                  <input type="email" class="input is-medium is-rounded" id="email" placeholder="Email" name="email">
+                </div>
+              </div>
+
+              <div class="field pt-3">
+                <!-- <label class="label has-text-left" for="senha">Senha:</label> -->
+                <div class="control">
+                  <input type="password" class="input is-medium is-rounded" id="senha" placeholder="Senha" name="senha">
+                </div>
+              </div>
+              <p class="help"></p>
+              <br>
+              <button type="submit" class="submit-button button is-fullwidth is-rounded is-primary is-medium">
+                <span class="icon-text">
+                  <span class="icon"><i class="mdi mdi-login"></i></span>
+                  <span>Entrar</span>
+                </span>
+
+              </button>
+              <br>
+              <div class="columns is-multiline">
+                <div class="column is-6 is-12-touch">
+
+                  <a href="../visao/cadastrar.html">Criar nova conta</a>
+                </div>
+                <div class="column is-6 is-12-touch">
+
+                  <a href="">Esqueci minha senha</a>
+
+                </div>
+
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="head-foot has-text-centered mb-6">
+      <a href="https://github.com/nidomus/projeto_final_web" target=”_blank”>
+        <i class=" mdi mdi-github has-text-light is-size-1"></i>
+      </a>
+      <a href="https://linkedin.com/in/herbert-oliveira-a99022215" target="_blank">
+        <i class=" mdi mdi-linkedin has-text-light is-size-1"></i>
+      </a>
+    </div>
+  </section>
+  <script>
+
+
+    function autenticar(formulario) {
+      xhttp = new XMLHttpRequest();
+      xhttp.onload = function () {
+        console.log(this.responseText);
+        resposta = JSON.parse(this.responseText);
+        if (resposta.erro == 0) {
+          localStorage.setItem("Usuario", JSON.stringify(resposta.usuario));
+          console.log(resposta.usuario);
+          location.href = './selecionar_projeto.html';
+        }
+        else {
+          bulmaToast.toast({
+            message: 'E-mail ou senha incorretos!',
+            type: 'is-danger'
+          })
+        }
+      };
+      xhttp.open("POST", "./../controle/autenticar.php", true);
+      xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+      dados = new FormData(formulario);
+      xhttp.send(new URLSearchParams(dados).toString());
+
+      return false;
+
+    }
+
+    function alternarFormulario() {
+
+      var innerInfo = document.getElementById('info-inner')
+
+      if (innerInfo.classList.contains('rotate')) {
+        innerInfo.classList.remove('rotate')
+      } else {
+        innerInfo.classList.add('rotate')
+      }
+
+
+    }
+
+  </script>
+</body>
+
+</html>
