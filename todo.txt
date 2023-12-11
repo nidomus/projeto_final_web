@@ -7,7 +7,7 @@ Requisitos do projeto:
     [] Ter dois níveis de usuário com diferentes perfis de acesso ou informações 
     personalizadas para cada usuário;
 
-    [] Possuir pelo menos um relacionamento entre classes do tipo 1xm ou n x m;
+    [OK] Possuir pelo menos um relacionamento entre classes do tipo 1xm ou n x m;
 
     [] Utilizar herança (opcional);
 

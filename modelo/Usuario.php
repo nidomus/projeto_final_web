@@ -1,17 +1,24 @@
 <?php
 class Usuario
-{
+{   
+    private $id;
     private $name;
     private $email;
     private $password;
     private $foto;
 
-    public function __construct($name, $email, $password, $foto)
-    {
+    public function __construct($id, $name, $email, $password, $foto)
+    {   
+        $this->id = $id;
         $this->name = $name;
         $this->email = $email;
         $this->password = md5($password);
         $this->foto = $foto;
+    }
+
+    public function getId()
+    {
+        return $this->id;
     }
 
     public function getName()

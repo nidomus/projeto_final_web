@@ -33,4 +33,16 @@ class projetoBD
 
         return null;
     }
+
+    public function salvar(Projeto $projeto, $id)
+    {   
+
+        $sql = "CALL criar_projeto (?, ?, ?)";
+        $stmt = $this->pdo->prepare($sql);
+
+        $stmt->execute([$id, $projeto->getNome(), $projeto->getResumo()]);
+
+        return true;
+
+    }
 }

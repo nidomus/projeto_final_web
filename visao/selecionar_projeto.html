@@ -14,6 +14,14 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bulma-toast/2.4.0/bulma-toast.min.js"
     integrity="sha512-mmZ7OjPwzgwFPe24uCirB6KvFtUHJqpeHo8cTyWpAvdesiGFRYHDnUKajPt3iWyhaDZ66KTXokBO/Z2kUPTxEw=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script>
+    if (localStorage.getItem("Usuario") === null) {
+      location.href = './login.html';
+    } else {
+      console.log(localStorage.getItem("Usuario"));
+    }
+  </script>
 </head>
 
 <body>
@@ -23,7 +31,7 @@
     <div class="hero-body ">
       <div class="container has-text-centered">
 
-        <div class="column is-4-desktop pt-0 mt-0 is-offset-4 is-offset-0-touch" id="login_box">
+        <div class="column is-6 pt-0 mt-0 is-offset-3 is-offset-0-touch" id="login_box">
           <div class="box p-6 ml-3 mr-3">
             <div class="level">
               <div class="level-item">
@@ -33,29 +41,40 @@
               </div>
             </div>
 
-            <p class="title has-text-centered has-text-dark mb-6" id="saudacao">Olá, </p>
-
-            <p class="subtitle has-text-centered mb-2">Escolha um Projeto</p>
+            <p class="title has-text-centered has-text-dark mb-5" id="saudacao">Olá, </p>
             <hr class="mt-0">
+
+            <p class="subtitle has-text-centered mb-2" id="mensagem">Escolha um Projeto</p>
+            <br>
 
             <div class="columns is-multiline" id="projetos">
 
             </div>
 
-
+            <div style="display: none;" id="buttonPrimeiroProjeto">
+              <a href="./criar_projeto.html" class="is-size-4">Clique aqui para criar seu primeiro projeto!</a>
+            </div>
 
 
             <br>
             <br>
-            <br>
-            <button class="button is-danger is-medium is-rounded" onclick="sair()">
-              <span class="icon-text">
 
-                <span class="has-text-weight-bold">Desconectar</span>
-                <i class="mdi mdi-exit-to-app icon"></i>
-              </span>
+            <div class="buttons is-centered">
 
-            </button>
+              <button class="button is-success " id="buttonAddProjeto" onclick="location.href='./criar_projeto.html'">
+                <span class="icon-text">
+                  <span class="has-text-weight-bold">Criar Projeto</span>
+                  <i class="mdi mdi-plus icon"></i>
+                </span>
+              </button>
+              <button class="button is-danger " onclick="sair()">
+                <span class="icon-text">
+                  <span class="has-text-weight-bold">Desconectar</span>
+                  <i class="mdi mdi-exit-to-app icon"></i>
+                </span>
+              </button>
+
+            </div>
           </div>
         </div>
       </div>
@@ -77,10 +96,9 @@
         carregarProjetos();
       }
       else {
-        bulmaToast.toast({
-          message: 'E-mail ou senha incorretos!',
-          type: 'is-danger'
-        })
+
+        ativarPrimeiroProjeto();
+
       }
     };
     xhttp.open("GET", "./../controle/getProjetosEmail.php", true);
@@ -120,6 +138,14 @@
 
         columns.append(column)
       });
+
+    }
+
+    function ativarPrimeiroProjeto() {
+
+      document.getElementById('buttonAddProjeto').style.display = 'none';
+      document.getElementById('buttonPrimeiroProjeto').style.display = 'block';
+      document.getElementById('mensagem').innerText = 'Ops... está um pouco vazio por aqui';
 
     }
 

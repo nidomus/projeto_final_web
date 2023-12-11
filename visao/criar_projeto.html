@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Acesso à página</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@6.5.95/css/materialdesignicons.min.css" />
+  <style>
+    @import '../assets/css/selecionar_projeto.css';
+    @import '../assets/css/background.css';
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bulma-toast/2.4.0/bulma-toast.min.js"
+    integrity="sha512-mmZ7OjPwzgwFPe24uCirB6KvFtUHJqpeHo8cTyWpAvdesiGFRYHDnUKajPt3iWyhaDZ66KTXokBO/Z2kUPTxEw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script>
+    if (localStorage.getItem("Usuario") === null) {
+      location.href = './visao/login.html';
+    } else {
+      console.log(localStorage.getItem("Usuario"));
+    }
+  </script>
+</head>
+
+<body>
+
+
+  <section class="hero is-fullheight">
+    <div class="hero-body ">
+      <div class="container has-text-centered">
+
+        <div class="column is-6 pt-0 mt-0 is-offset-3 is-offset-0-touch" id="login_box">
+          <div class="box p-6 ml-3 mr-3">
+
+
+            <p class="title has-text-centered has-text-dark mb-5" id="saudacao">CRIAR NOVO PROJETO</p>
+            <hr class="mt-0">
+
+            <form action="" onsubmit="return criarProjeto(this)">
+
+              <div class="field">
+
+                <label for="nome" class="label has-text-left">Nome do Projeto:</label>
+                <div class="control">
+
+                  <input type="text" required name="nome" id='nome' class="input is-medium">
+                </div>
+
+              </div>
+
+              <div class="field">
+
+                <label for="nome" class="label has-text-left">Resumo (Opcional):</label>
+                <div class="control">
+
+                  <textarea type="textarea" name="resumo" id='resumo' class="textarea is-medium"></textarea>
+                </div>
+
+              </div>
+
+              <button class="button is-fullwidth is-success is-medium has-text-weight-bold"> Criar Projeto</button>
+
+            </form>
+            <br>
+            <p class="has-text-left has-text-danger">
+              <a href="./selecionar_projeto.html">Cancelar</a>
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    </div>
+  </section>
+  <script>
+
+    function criarProjeto(formulario) {
+      xhttp = new XMLHttpRequest();
+      xhttp.onload = function () {
+
+        console.log(this.responseText);
+        resposta = JSON.parse(this.responseText);
+        if (resposta.erro == 0) {
+          location.href = './selecionar_projeto.html';
+        }
+        else {
+          alert('erro brabo')
+        }
+
+      };
+      xhttp.open("POST", "./../controle/criarProjeto.php", true);
+      xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+      dados = new FormData(formulario);
+
+      // console.log(new URLSearchParams(dados).toString());
+      xhttp.send(new URLSearchParams(dados).toString());
+
+      return false;
+
+
+
+    }
+
+
+  </script>
+</body>
+
+</html>

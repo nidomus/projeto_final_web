@@ -9,6 +9,14 @@
     <meta name="viewport" content="width=
     , initial-scale=1.0">
     <title>Document</title>
+
+    <script>
+        if (localStorage.getItem("Usuario") === null) {
+            location.href = './login.html';
+        } else {
+            console.log(localStorage.getItem("Usuario"));
+        }
+    </script>
 </head>
 
 <body>

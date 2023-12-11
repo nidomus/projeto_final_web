@@ -53,7 +53,7 @@ class UsuarioBD
         $user = $stmt->fetch();
 
         if ($user) {
-            $usuario = new Usuario($user["nome"],$user["email"],$user["password"],$user["foto"]);
+            $usuario = new Usuario($user['id'], $user["nome"],$user["email"],$user["password"],$user["foto"]);
             return $usuario;
         } 
         return null;

@@ -164,15 +164,6 @@
 
         location.href = './login.html';
 
-        // resposta = JSON.parse(this.responseText);
-        // if (resposta.erro == 0) {
-        //   localStorage.setItem("Usuario", resposta.usuario);
-        //   console.log(resposta.usuario);
-        //   location.href = './../index.html';
-        // }
-        // else {
-        //   alert('Ocorreu algum erro!')
-        // }
       };
       xhttp.open("POST", "./../controle/cadastrar.php", true);
       xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
