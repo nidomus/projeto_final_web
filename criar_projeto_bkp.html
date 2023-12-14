@@ -8,8 +8,8 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@6.5.95/css/materialdesignicons.min.css" />
   <style>
-    @import '../assets/css/selecionar_projeto.css';
-    @import '../assets/css/background.css';
+    @import './assets/css/selecionar_projeto.css';
+    @import './assets/css/background.css';
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bulma-toast/2.4.0/bulma-toast.min.js"
     integrity="sha512-mmZ7OjPwzgwFPe24uCirB6KvFtUHJqpeHo8cTyWpAvdesiGFRYHDnUKajPt3iWyhaDZ66KTXokBO/Z2kUPTxEw=="
@@ -17,7 +17,7 @@
 
   <script>
     if (localStorage.getItem("Usuario") === null) {
-      location.href = './visao/login.html';
+      location.href = './login.html';
     } else {
       console.log(localStorage.getItem("Usuario"));
     }
@@ -28,7 +28,7 @@
 
 
   <section class="hero is-fullheight">
-    <div class="hero-body ">
+    <div class="hero-body">
       <div class="container has-text-centered">
 
         <div class="column is-6 pt-0 mt-0 is-offset-3 is-offset-0-touch" id="login_box">
@@ -90,7 +90,7 @@
         }
 
       };
-      xhttp.open("POST", "./../controle/criarProjeto.php", true);
+      xhttp.open("POST", "./controle/criarProjeto.php", true);
       xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
       dados = new FormData(formulario);
@@ -99,8 +99,6 @@
       xhttp.send(new URLSearchParams(dados).toString());
 
       return false;
-
-
 
     }
 

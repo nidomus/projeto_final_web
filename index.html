@@ -1,41 +1,372 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@6.5.95/css/materialdesignicons.min.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @import './assets/css/background.css';
+        @import './assets/css/index.css';
+    </style>
     <script>
         if (localStorage.getItem("Usuario") === null) {
-            location.href = './visao/login.html';
-        } else {
-            console.log(localStorage.getItem("Usuario"));
-        }
+            location.href = './login.html';
+        } 
     </script>
 </head>
 
 <body>
-    <p>Usuário logado</p>
-    <button onclick="sair()">Sair</button>
 
-    <img class=" is-rounded p-1 " id="foto_usuario" src="" alt="">
+    <section class="hero is-fullheight">
+        <!-- Hero head: will stick at the top -->
+        <div class="hero-head ">
+            <header class="navbar is-transparent">
+                <div class="container">
+                    <div class="navbar-brand mt-3 mb-3">
+                        <a class="navbar-item">
+                            <p class="title has-text-centered has-text-white mb-0 is-size-2 icon-text">
+                                <span>Sprint King</span>
+                                <i class="icon mdi mdi-crown has-text-warning pt-5"></i>
+
+                            </p>
+                        </a>
+                        <span class="navbar-burger" data-target="navbarMenuHeroC">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </span>
+                    </div>
+                    <div id="navbarMenuHeroC" class="navbar-menu">
+                        <hr class="navbar-divider">
+                        <div class="navbar-start">
+                            <div class="navbar-item has-dropdown is-hoverable  has-text-weight-bold" id="projetos">
+                                <a class="navbar-link item">
+                                    <span class="is-size-3" id="nome_projeto"></span>
+                                </a>
+
+                                <div class="navbar-dropdown" id="dropdown-projetos">
+
+                                </div>
+                            </div>
+
+                        </div>
 
 
-    <script>
+                        <div class="navbar-end">
+                            <a href="./index.html" class="navbar-item item  has-text-weight-bold">
+                                Home
+                            </a>
+                            <a class="navbar-item item  has-text-weight-bold">
+                                Sprints
+                            </a>
 
-        let usuario = JSON.parse(localStorage.getItem("Usuario"))
-        console.log(usuario)
-        document.getElementById('foto_usuario').src = usuario.foto
+                            <a class="navbar-item item has-text-weight-bold">
+                                Calendário
+                            </a>
 
-        function sair() {
-            localStorage.removeItem("Usuario");
-            xhttp = new XMLHttpRequest();
-            xhttp.onload = function () {
-                console.log(this.responseText);
-            };
-            xhttp.open("GET", "./controle/sair.php", true);
-            xhttp.send();
-            location.href = './visao/login.html';
-        }
-    </script>
+                            <a class="navbar-item item has-text-weight-bold">
+                                <figure class="image is-32x32">
+                                    <img class=" is-rounded " id="foto_usuario" alt="Foto do Usuário">
+                                </figure>
+                            </a>
+
+                            <div class="navbar-item has-dropdown is-hoverable  has-text-weight-bold">
+                                <a class="navbar-link item">
+                                    <span id="saudacao">Olá, </span>
+
+                                </a>
+
+                                <div class="navbar-dropdown">
+                                    <a class="navbar-item">
+                                        Meu Perfil
+                                    </a>
+                                    <a class="navbar-item">
+                                        Notificações
+                                    </a>
+                                    <hr class="navbar-divider">
+                                    <a class="navbar-item" onclick="sair()">
+                                        <span class="icon-text has-text-danger">
+                                            <span>Sair</span>
+                                            <i class="icon mdi mdi-exit-to-app"></i>
+
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+                </div>
+        </div>
+        </header>
+        </div>
+
+        <!-- Hero content: will be in the middle -->
+        <div class="hero-body">
+            <div class="container has-text-centered" id="hero-container">
+
+                <div class="box p-6" id="projeto-selecionado">
+                    <h1 class="title has-text-left is-size-2" id="nome-projeto">
+                        Nome do Projeto
+                    </h1>
+                    <h2 class="subtitle has-text-left" id="resumo-projeto">
+                        Resumo do projeto
+                    </h2>
+
+                    <hr>
+                    <h1 class="title has-text-left is-size-4">
+                        Gerente do Projeto
+                    </h1>
+
+                    <div class="column is-4 pl-0">
+                        <article class="media">
+                            <figure class="media-left">
+                                <p class="image is-64x64 is-fullwidth">
+                                    <img class="is-rounded" id="foto-gerente"
+                                        src="https://bulma.io/images/placeholders/128x128.png">
+                                </p>
+                            </figure>
+                            <div class="media-content">
+                                <h1 class="title has-text-left is-size-5 ">
+                                    <span class="icon-text">
+                                        <span id="nome-gerente">Nome do Gerente</span>
+                                        <i class="icon mdi mdi-crown has-text-warning"></i>
+                                    </span>
+                                </h1>
+                                <h2 class="subtitle  has-text-left is-size-6" id="email-gerente"> email@email.com</h2>
+                            </div>
+                        </article>
+                    </div>
+                    <hr>
+                    <h1 class="title has-text-left is-size-4">
+                        Membros
+                    </h1>
+                    <br>
+                    <div class="columns is-multiline" id="membros-projeto">
+
+                    </div>
+
+                </div>
+
+
+
+                <p id="aviso">
+                    <span class="title has-text-link-light">
+                        Você não faz parte de nenhum projeto!
+                    </span>
+                    <br>
+                    <br>
+                    <span class="subtitle has-text-warning">
+                        <a href="./criar_projeto.html">Clique aqui para criar seu primeiro projeto.</a>
+                    </span>
+                </p>
+            </div>
+
+        </div>
+
+
+        <!-- Hero footer: will stick at the bottom -->
+        <!-- <div class="hero-foot">
+            <nav class="tabs is-boxed is-fullwidth">
+                <div class="container">
+                    <ul>
+                        <li class="is-active"><a>Overview</a></li>
+                        <li><a>Modifiers</a></li>
+                        <li><a>Grid</a></li>
+                        <li><a>Elements</a></li>
+                        <li><a>Components</a></li>
+                        <li><a>Layout</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div> -->
+    </section>
+
 </body>
+
+<script>
+
+    let usuario = JSON.parse(localStorage.getItem("Usuario"))
+    let projetos = [];
+    let membros = [];
+    let projeto_selecionado;
+
+    xhttp = new XMLHttpRequest();
+    xhttp.onload = function () {
+        // console.log(this.responseText);
+        resposta = JSON.parse(this.responseText);
+        if (resposta.erro == 0) {
+
+            projetos = resposta.projetos;
+            carregarProjetos();
+            getProjetoSelecionado()
+
+
+        } else {
+            document.getElementById('aviso').style.display = 'block';
+            document.getElementById('projetos').style.display = 'none';
+            document.getElementById('projeto-selecionado').style.display = 'none';
+        }
+
+    };
+    xhttp.open("GET", "./controle/getProjetosEmail.php", true);
+    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttp.send();
+
+    document.getElementById('foto_usuario').src = './' + usuario.foto
+    document.getElementById('saudacao').innerText += '     ' + usuario.nome.split(' ')[0]
+
+    function carregarProjetos() {
+
+        const columns = document.getElementById('dropdown-projetos')
+
+        projetos.forEach(projeto => {
+            // console.log(projeto)
+            var item = document.createElement('a')
+
+            item.classList.add('navbar-item')
+
+
+            var texto = document.createElement('p')
+            texto.classList.add('level', 'is-mobile')
+
+
+            var nome = document.createElement('span')
+            nome.innerText = projeto.nome
+            nome.classList.add('has-text-left', 'level-left')
+
+
+            texto.append(nome)
+
+            item.append(texto)
+            item.id = projeto.id
+
+            item.addEventListener('click', function a() { selecionarProjeto(item.id) })
+
+            columns.append(item)
+        });
+
+    }
+
+    function getProjetoSelecionado() {
+        xhttp = new XMLHttpRequest();
+        xhttp.onload = function () {
+            console.log(this.responseText)
+            resposta = JSON.parse(this.responseText);
+
+            if (resposta.erro == 0) {
+                projeto_selecionado = resposta.projeto;
+                carregarInformacoesProjeto();
+            }
+
+
+        };
+
+        xhttp.open("POST", "./controle/getProjetoPorId.php", true);
+        xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+        dados = new FormData();
+        dados.append('id', 15)
+
+        xhttp.send(new URLSearchParams(dados).toString());
+
+    }
+
+    function selecionarProjeto(id) {
+        console.log(id)
+    }
+
+    function sair() {
+        localStorage.removeItem("Usuario");
+        xhttp = new XMLHttpRequest();
+        xhttp.onload = function () {
+            console.log(this.responseText);
+        };
+        xhttp.open("GET", "./controle/sair.php", true);
+        xhttp.send();
+        location.href = './login.html';
+    }
+
+    function carregarInformacoesProjeto() {
+
+        document.getElementById('nome_projeto').innerText = projeto_selecionado.nome
+        document.getElementById('projeto-selecionado').style.display = 'block';
+
+        // Alterando informações do projeto
+
+        document.getElementById('nome-projeto').innerText = projeto_selecionado.nome
+        document.getElementById('resumo-projeto').innerText = projeto_selecionado.resumo
+
+        const gerente = projeto_selecionado.membros.filter(membro => membro.cargo === "gerente")[0]
+
+        // Atribuí as informações do gerente do projeto
+        document.getElementById('nome-gerente').innerText = gerente.nome
+        document.getElementById('email-gerente').innerText = gerente.email
+        document.getElementById('foto-gerente').src = gerente.foto
+
+
+        console.log(gerente)
+
+        const columns = document.getElementById('membros-projeto')
+
+        projeto_selecionado.membros.forEach(membro => {
+
+            console.log(membro)
+
+            const column = document.createElement('div')
+            column.classList.add('column', 'is-4')
+
+            const article = document.createElement('article')
+            article.classList.add('media')
+
+            const figure = document.createElement('figure')
+            figure.classList.add('media-left')
+
+            //image is-64x64 is-fullwidth
+
+            const pImage = document.createElement('p')
+            pImage.classList.add("image", "is-64x64", "is-fullwidth")
+
+            const img = document.createElement('img')
+            img.classList.add('is-rounded')
+            img.src = membro.foto
+
+            const content = document.createElement('div')
+            content.classList.add('media-content')
+
+            const nomeMembro = document.createElement('h1')
+            nomeMembro.classList.add('title', 'has-text-left', 'is-size-5')
+            nomeMembro.innerText = membro.nome
+
+            const emailMembro = document.createElement('h2')
+            emailMembro.classList.add('subtitle', 'has-text-left', 'is-size-6')
+            emailMembro.innerText = membro.email
+
+
+            columns.append(column)
+            column.append(article)
+
+            article.append(figure)
+            figure.append(pImage)
+            pImage.append(img)
+
+            article.append(content)
+            content.append(nomeMembro)
+            content.append(emailMembro)
+
+        })
+
+
+    }
+
+
+</script>
 
 </html>

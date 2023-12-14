@@ -6,6 +6,7 @@ class Projeto{
     public $nome;
     public $resumo;
     public $cargo;
+    public $membros;
 
 
     public function __set($id,$nome){

@@ -5,6 +5,8 @@ html {
 
     animation: gradient 15s ease infinite;
     background-size: 500% 500%;
+
+    overflow-y: auto;
 }
 
 

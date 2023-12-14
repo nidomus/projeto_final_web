@@ -1,5 +1,6 @@
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"] . "/projeto_final_web/modelo/Projeto.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/projeto_final_web/modelo/Membro.php";
 class projetoBD
 {
     private $pdo;
@@ -24,7 +25,7 @@ class projetoBD
 
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([$email]);
-        $projetos = $stmt->fetchAll(PDO::FETCH_CLASS, $class="projeto");
+        $projetos = $stmt->fetchAll(PDO::FETCH_CLASS, $class="Projeto");
         
 
         if($projetos){
@@ -33,6 +34,39 @@ class projetoBD
 
         return null;
     }
+
+    public function getProjetoPorId(string $id){
+
+        $sql = "SELECT * FROM projeto
+        where id = ?";
+
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$id]);
+        $proj = $stmt->fetch();
+
+
+        $sql = "SELECT u.nome,u.foto,u.email,membro.cargo FROM membro
+        inner join usuario u on u.id = membro.id_usuario
+        where membro.id_projeto = ?";
+
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$id]);
+        $membros = $stmt->fetchAll(PDO::FETCH_CLASS, $class="Membro", ['nome',null,'email','foto']);
+
+        if($proj){
+
+
+            $projeto = new Projeto();
+            $projeto->id = $proj['id'];
+            $projeto->nome = $proj['nome'];
+            $projeto->resumo = $proj['resumo'];
+            $projeto->membros = $membros;
+            
+            return $projeto;
+        }
+        return null;
+    }
+
 
     public function salvar(Projeto $projeto, $id)
     {   

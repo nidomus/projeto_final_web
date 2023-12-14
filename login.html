@@ -8,8 +8,8 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@6.5.95/css/materialdesignicons.min.css" />
   <style>
-    @import '../assets/css/login.css';
-    @import '../assets/css/background.css';
+    @import './assets/css/login.css';
+    @import './assets/css/background.css';
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bulma-toast/2.4.0/bulma-toast.min.js"
     integrity="sha512-mmZ7OjPwzgwFPe24uCirB6KvFtUHJqpeHo8cTyWpAvdesiGFRYHDnUKajPt3iWyhaDZ66KTXokBO/Z2kUPTxEw=="
@@ -46,14 +46,16 @@
               <div class="field">
                 <!-- <label class="label has-text-left" for="email">Email:</label> -->
                 <div class="control">
-                  <input type="email" class="input is-medium is-rounded" id="email" placeholder="Email" name="email">
+                  <input type="email" required class="input is-medium is-rounded" id="email" placeholder="Email"
+                    name="email">
                 </div>
               </div>
 
               <div class="field pt-3">
                 <!-- <label class="label has-text-left" for="senha">Senha:</label> -->
                 <div class="control">
-                  <input type="password" class="input is-medium is-rounded" id="senha" placeholder="Senha" name="senha">
+                  <input type="password" required class="input is-medium is-rounded" id="senha" placeholder="Senha"
+                    name="senha">
                 </div>
               </div>
               <p class="help"></p>
@@ -69,7 +71,7 @@
               <div class="columns is-multiline">
                 <div class="column is-6 is-12-touch">
 
-                  <a href="../visao/cadastrar.html">Criar nova conta</a>
+                  <a href="./cadastrar.html">Criar nova conta</a>
                 </div>
                 <div class="column is-6 is-12-touch">
 
@@ -104,7 +106,7 @@
         if (resposta.erro == 0) {
           localStorage.setItem("Usuario", JSON.stringify(resposta.usuario));
           console.log(resposta.usuario);
-          location.href = './selecionar_projeto.html';
+          location.href = './index.html';
         }
         else {
           bulmaToast.toast({
@@ -113,7 +115,7 @@
           })
         }
       };
-      xhttp.open("POST", "./../controle/autenticar.php", true);
+      xhttp.open("POST", "./controle/autenticar.php", true);
       xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
       dados = new FormData(formulario);
       xhttp.send(new URLSearchParams(dados).toString());

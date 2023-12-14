@@ -20,6 +20,28 @@
     transform: translate(-50%, -50%);
 }
 
+#projetos {
+
+    overflow-y: auto;
+    max-height: 200px;
+}
+
+#projetos::-webkit-scrollbar {
+    width: 10px;
+    background-color: transparent;
+}
+
+#projetos::-webkit-scrollbar-track {
+    background-color: transparent;
+    display: none;
+}
+
+#projetos::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #30045a;
+
+}
+
 .projeto {
 
     border-radius: 20px;

@@ -11,7 +11,8 @@ if($usuario==null){
 }else{
     echo '{"erro":"0", "usuario":{"nome":"'.$usuario->getName().'","email":"'.$usuario->getEmail().
         '","foto":"'.$usuario->getFoto().'"}}';
-
+    
+    
     $_SESSION["email"] = $usuario->getEmail();
     $_SESSION["user_id"] = $usuario->getId();
 }

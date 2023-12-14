@@ -53,10 +53,21 @@ class UsuarioBD
         $user = $stmt->fetch();
 
         if ($user) {
-            $usuario = new Usuario($user['id'], $user["nome"],$user["email"],$user["password"],$user["foto"]);
+            $usuario = new Usuario($user["nome"],$user["email"],$user["password"],$user["foto"]);
+            $usuario->setID($user['id']);
             return $usuario;
         } 
         return null;
+    }
+
+    public function verificar_email(string $email)
+    {
+
+        $sql = "SELECT * FROM usuario WHERE email = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$email]);
+        $user = $stmt->fetch();
+        return $user;
     }
 }
 

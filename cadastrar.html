@@ -8,8 +8,8 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@6.5.95/css/materialdesignicons.min.css" />
   <style>
-    @import '../assets/css/cadastrar.css';
-    @import '../assets/css/background.css';
+    @import './assets/css/cadastrar.css';
+    @import './assets/css/background.css';
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bulma-toast/2.4.0/bulma-toast.min.js"
     integrity="sha512-mmZ7OjPwzgwFPe24uCirB6KvFtUHJqpeHo8cTyWpAvdesiGFRYHDnUKajPt3iWyhaDZ66KTXokBO/Z2kUPTxEw=="
@@ -53,7 +53,7 @@
                         placeholder="Repita sua senha" name="senha_2">
                     </div>
                   </div>
-                  <p class="help is-danger" id="texto_ajuda"></p>
+                  <p class="help is-danger is-size-6" id="texto_ajuda"></p>
                   <br>
                   <button type="submit" class="submit-button button is-fullwidth is-rounded is-medium">
                     <span class="icon-text">
@@ -64,7 +64,7 @@
                   <br>
                   <div class="level">
                     <div class="level-item">
-                      <a href="../visao/login.html">Já tenho uma conta</a>
+                      <a href="./login.html">Já tenho uma conta</a>
                     </div>
 
                   </div>
@@ -80,15 +80,16 @@
                   <div class="level">
                     <div class="level-item">
                       <figure class="image">
-                        <img class=" is-rounded p-1 " id="foto_usuario"
-                          src="../assets/imagens/usuarios/user_default.jpg" alt="">
+                        <img class=" is-rounded p-1 " id="foto_usuario" src="./assets/imagens/usuarios/user_default.jpg"
+                          alt="">
                       </figure>
                     </div>
                   </div>
 
                   <div class="level">
                     <div class="level-item">
-                      <input type="file" class="inputfile" nome="foto" oninput="alterarFoto(this)" id="foto">
+                      <input type="file" accept=".jpg, .jpeg, .png" class="inputfile" nome="foto"
+                        oninput="alterarFoto(this)" id="foto">
 
                       <label for="foto">
                         <span class="text-icon">
@@ -152,20 +153,20 @@
     let foto;
 
     function cadastrar(formulario) {
+
       xhttp = new XMLHttpRequest();
       xhttp.onload = function () {
 
         var nome_arquivo = this.responseText
+        console.log(nome_arquivo)
 
         nome_arquivo = nome_arquivo.replace(/(\r\n|\n|\r)/gm, "")
-
-
         uploadFoto(nome_arquivo);
 
-        location.href = './login.html';
+        location.href = './login.html'
 
       };
-      xhttp.open("POST", "./../controle/cadastrar.php", true);
+      xhttp.open("POST", "./controle/cadastrar.php", true);
       xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
       dados = new FormData(formulario);
@@ -185,6 +186,8 @@
 
       return false;
 
+
+
     }
 
     async function uploadFoto(nome) {
@@ -192,7 +195,7 @@
       const form = new FormData()
       form.append('file', foto)
       form.append('nome', nome)
-      await fetch('./../controle/upload.php', {
+      await fetch('./controle/upload.php', {
         method: "POST",
         body: form
       });
@@ -227,36 +230,48 @@
         reader.readAsDataURL(foto);
       }
 
-      // const form = new FormData()
-      // form.append('file', foto)
-      // await fetch('./../controle/upload.php', {
-      //   method: "POST",
-      //   body: form
-      // });
-
     }
 
     function validarDados(formulario) {
 
       dados1 = new FormData(formulario)
 
-      email = dados1.get('email')
+      let email_cadastrado = false;
+
+
       senha1 = dados1.get('senha_1')
       senha2 = dados1.get('senha_2')
 
-      if (senha1 !== senha2) {
+      xhttp = new XMLHttpRequest();
+      xhttp.onload = function () {
+        console.log(this.responseText);
+        resposta = JSON.parse(this.responseText);
+        console.log(resposta)
 
-        document.getElementById('texto_ajuda').innerText = "As senhas informadas não são iguais."
-        document.getElementById('senha1').classList.add('is-danger')
-        document.getElementById('senha2').classList.add('is-danger')
+        if (resposta.existe == 1) {
+          document.getElementById('texto_ajuda').innerText = "E-mail já cadastrado!"
+          return;
+        }
 
-      } else {
-        document.getElementById('texto_ajuda').innerText = ""
-        document.getElementById('senha1').classList.remove('is-danger')
-        document.getElementById('senha2').classList.remove('is-danger')
-        alternarFormulario();
+        if (senha1 !== senha2) {
 
-      }
+          document.getElementById('texto_ajuda').innerText = "As senhas informadas não são iguais."
+          document.getElementById('senha1').classList.add('is-danger')
+          document.getElementById('senha2').classList.add('is-danger')
+
+        } else {
+          document.getElementById('texto_ajuda').innerText = ""
+          document.getElementById('senha1').classList.remove('is-danger')
+          document.getElementById('senha2').classList.remove('is-danger')
+          alternarFormulario()
+        }
+
+
+      };
+      xhttp.open("POST", "./controle/verificar_email.php", true);
+      xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+      xhttp.send(new URLSearchParams(dados1).toString());
 
       return false;
 

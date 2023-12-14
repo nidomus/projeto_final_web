@@ -1,0 +1,41 @@
+#foto_usuario {
+
+    border: #8a2ce2 2px solid;
+
+
+}
+
+#foto-gerente {
+
+    border: #8a2ce2 2px solid;
+
+
+}
+
+#projeto-selecionado {
+    display: none;
+}
+
+#aviso {
+    display: none;
+}
+
+#box-container {
+    height: auto;
+}
+
+.image img {
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+.item {
+    font-size: large;
+    color: #dbdbdb;
+}
+
+.hero-head {
+    background-color: #18052b;
+
+}
