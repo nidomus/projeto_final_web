@@ -21,7 +21,7 @@ if($_POST['foto'] !== 'null'){
     $nome_foto = null;
 }
 
-$user = new Usuario($_POST['nome'],$_POST['email'],$_POST['senha'], $photo_path);
+$user = new Usuario(null,$_POST['nome'],$_POST['email'],$_POST['senha'], $photo_path);
 
 $udb = new UsuarioBD();
 

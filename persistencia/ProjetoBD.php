@@ -45,17 +45,16 @@ class projetoBD
         $proj = $stmt->fetch();
 
 
-        $sql = "SELECT u.nome,u.foto,u.email,membro.cargo FROM membro
+        $sql = "SELECT u.id,u.nome,u.foto,u.email,membro.cargo FROM membro
         inner join usuario u on u.id = membro.id_usuario
         where membro.id_projeto = ?";
 
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([$id]);
-        $membros = $stmt->fetchAll(PDO::FETCH_CLASS, $class="Membro", ['nome',null,'email','foto']);
+        $membros = $stmt->fetchAll(PDO::FETCH_CLASS, $class="Membro", ['id','nome',null,'email','foto']);
 
         if($proj){
-
-
+            
             $projeto = new Projeto();
             $projeto->id = $proj['id'];
             $projeto->nome = $proj['nome'];
@@ -71,12 +70,13 @@ class projetoBD
     public function salvar(Projeto $projeto, $id)
     {   
 
-        $sql = "CALL criar_projeto (?, ?, ?)";
+        $sql = "CALL criar_projeto (?, ?, ?, @var_id_projeto)";
         $stmt = $this->pdo->prepare($sql);
 
         $stmt->execute([$id, $projeto->getNome(), $projeto->getResumo()]);
 
-        return true;
+        return $stmt->fetch()['var_id_projeto'];
+
 
     }
 }

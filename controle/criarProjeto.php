@@ -13,7 +13,9 @@ $projetoBD = new ProjetoBD();
 $resultado = $projetoBD->salvar($projeto, $_SESSION['user_id']);
 
 if($resultado){
-    echo '{"erro":"0"}';
+    echo '{"erro":"0"'.',"id_projeto":"'.$resultado.'"}';
+
+    $_SESSION["projeto_id"] = $resultado;
 }
 else{
     echo '{"erro":"1"}';

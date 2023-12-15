@@ -5,11 +5,38 @@
 
 }
 
+
 #foto-gerente {
+    border: gold 2px solid;
+}
 
-    border: #8a2ce2 2px solid;
+.foto-membro {
+    border: #18052b 2px solid;
+}
 
 
+
+.media-content {
+    display: inline-block;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+#aviso-usuario-nao-encontrado,
+#aviso-usuario-encontrado,
+#usuario-encontrado,
+#aviso-membros-vazio,
+#botao-adicionar-membro {
+    display: none;
+}
+
+
+
+.info-membro {
+    overflow: hidden;
+    width: 100%;
+    text-overflow: ellipsis;
 }
 
 #projeto-selecionado {
@@ -30,6 +57,13 @@
     width: 100%;
 }
 
+.media {
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: #18052b 1px 1px 10px;
+
+}
+
 .item {
     font-size: large;
     color: #dbdbdb;
@@ -38,4 +72,16 @@
 .hero-head {
     background-color: #18052b;
 
+}
+
+.modal-card-head {
+    background-color: #18052b;
+}
+
+.modal-card-head p {
+    color: #dbdbdb;
+}
+
+.modal-content {
+    max-width: 90%;
 }

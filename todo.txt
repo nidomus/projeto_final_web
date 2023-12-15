@@ -4,12 +4,12 @@ Projetar um sistema web de pequeno porte utilizando boas práticas de padrão de
 
 Requisitos do projeto:
 
-    [] Ter dois níveis de usuário com diferentes perfis de acesso ou informações 
+    [OK] Ter dois níveis de usuário com diferentes perfis de acesso ou informações 
     personalizadas para cada usuário;
 
     [OK] Possuir pelo menos um relacionamento entre classes do tipo 1xm ou n x m;
 
-    [] Utilizar herança (opcional);
+    [OK] Utilizar herança (opcional);
 
     [OK] Utilizar upload e armazenamento de arquivos;
 

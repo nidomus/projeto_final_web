@@ -25,8 +25,8 @@
 
     <section class="hero is-fullheight">
         <!-- Hero head: will stick at the top -->
-        <div class="hero-head">
-            <header class="navbar">
+        <div class="hero-head ">
+            <header class="navbar is-transparent">
                 <div class="container">
                     <div class="navbar-brand mt-3 mb-3">
                         <a class="navbar-item">
@@ -44,64 +44,40 @@
                     </div>
                     <div id="navbarMenuHeroC" class="navbar-menu">
                         <hr class="navbar-divider">
-                        <div class="navbar-start">
-                            <div class="navbar-item has-dropdown is-hoverable  has-text-weight-bold" id="projetos">
-                                <a class="navbar-link">
-                                    <span class="is-size-3">Projeto 1</span>
-
-                                </a>
-
-                                <div class="navbar-dropdown" id="dropdown-projetos">
-                                    <a class="navbar-item item">
-                                        Meu Perfil
-                                    </a>
-                                    <a class="navbar-item item">
-                                        Notificações
-                                    </a>
-                                    <hr class="navbar-divider">
-                                    <a class="navbar-item item">
-                                        <span class="icon-text has-text-danger">
-                                            <span>Sair</span>
-                                            <i class="icon mdi mdi-exit-to-app"></i>
-
-                                        </span>
-                                    </a>
-                                </div>
-                            </div>
-
-                        </div>
-
 
                         <div class="navbar-end">
-                            <a href="./index.html" class="navbar-item  has-text-weight-bold">
+                            <a href="./index.html" class="navbar-item item  has-text-weight-bold">
                                 Home
                             </a>
-                            <a class="navbar-item  has-text-weight-bold">
+                            <a class="navbar-item item  has-text-weight-bold">
                                 Sprints
                             </a>
 
-                            <a class="navbar-item  has-text-weight-bold">
+                            <a class="navbar-item item has-text-weight-bold">
                                 Calendário
                             </a>
 
+                            <a class="navbar-item item has-text-weight-bold">
+
+                            </a>
+
                             <div class="navbar-item has-dropdown is-hoverable  has-text-weight-bold">
-                                <a class="navbar-link ">
-                                    <figure class="image mr-3">
+                                <a class="navbar-link item">
+                                    <figure class="image is-32x32 mr-2">
                                         <img class=" is-rounded " id="foto_usuario" alt="Foto do Usuário">
                                     </figure>
                                     <span id="saudacao">Olá, </span>
-
                                 </a>
 
                                 <div class="navbar-dropdown">
-                                    <a class="navbar-item has-text-black">
+                                    <a class="navbar-item">
                                         Meu Perfil
                                     </a>
-                                    <a class="navbar-item has-text-black">
+                                    <a class="navbar-item">
                                         Notificações
                                     </a>
                                     <hr class="navbar-divider">
-                                    <a class="navbar-item">
+                                    <a class="navbar-item" onclick="sair()">
                                         <span class="icon-text has-text-danger">
                                             <span>Sair</span>
                                             <i class="icon mdi mdi-exit-to-app"></i>
@@ -117,8 +93,7 @@
 
                     </div>
                 </div>
-        </div>
-        </header>
+            </header>
         </div>
 
         <!-- Hero content: will be in the middle -->
@@ -193,6 +168,54 @@
 
     document.getElementById('foto_usuario').src = './' + usuario.foto
     document.getElementById('saudacao').innerText += '     ' + usuario.nome.split(' ')[0]
+
+    function criarProjeto(formulario) {
+        try {
+
+
+            xhttp = new XMLHttpRequest();
+            xhttp.onload = function () {
+
+                console.log(this.responseText);
+                resposta = JSON.parse(this.responseText);
+                if (resposta.erro == 0) {
+
+                    usuario.projeto_selecionado = resposta.id_projeto
+
+                    localStorage.setItem('Usuario', JSON.stringify(usuario))
+
+                    location.href = './index.html'
+                }
+                else {
+                    alert('erro brabo')
+                }
+
+            };
+            xhttp.open("POST", "./controle/criarProjeto.php", true);
+            xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+            dados = new FormData(formulario);
+
+            // console.log(new URLSearchParams(dados).toString());
+            xhttp.send(new URLSearchParams(dados).toString());
+            return false;
+        } catch (error) {
+
+            return false;
+        }
+
+    }
+
+    function sair() {
+        localStorage.removeItem("Usuario");
+        xhttp = new XMLHttpRequest();
+        xhttp.onload = function () {
+            console.log(this.responseText);
+        };
+        xhttp.open("GET", "./controle/sair.php", true);
+        xhttp.send();
+        location.href = './login.html';
+    }
 
 </script>
 

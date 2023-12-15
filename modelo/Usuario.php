@@ -6,10 +6,11 @@ class Usuario
     private $email;
     private $password;
     private $foto;
-    private $projeto_selecionado;
+    private $projetoSelecionado;
 
-    public function __construct($name, $email, $password, $foto)
+    public function __construct($id,$name, $email, $password, $foto)
     {   
+        $this->id = $id;
         $this->name = $name;
         $this->email = $email;
         $this->password = md5($password);
@@ -25,6 +26,17 @@ class Usuario
     {
         $this->id = $id;
     }
+
+    public function getProjetoSelecionado()
+    {
+        return $this->projetoSelecionado;
+    }
+
+    public function setProjetoSelecionado($projetoSelecionado)
+    {
+        $this->projetoSelecionado = $projetoSelecionado;
+    }
+
 
     public function getName()
     {

@@ -53,11 +53,43 @@ class UsuarioBD
         $user = $stmt->fetch();
 
         if ($user) {
-            $usuario = new Usuario($user["nome"],$user["email"],$user["password"],$user["foto"]);
-            $usuario->setID($user['id']);
+            $usuario = new Usuario($user['id'],$user["nome"],$user["email"],$user["password"],$user["foto"]);
+
+            $usuario->setProjetoSelecionado($user['projeto_selecionado']);
+
             return $usuario;
         } 
         return null;
+    }
+
+    public function buscarUsuarioPorEmail(string $email)
+    {
+        
+        $sql = "SELECT * FROM usuario WHERE email = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$email]);
+        $user = $stmt->fetch();
+
+        if ($user) {
+            $usuario = new Usuario($user['id'],$user["nome"],$user["email"],$user["password"],$user["foto"]);
+            return $usuario;
+        } 
+        return null;
+    }
+
+    public function alterarProjetoSelecionado($usuario,$projeto)
+    {
+        
+        $sql = "UPDATE usuario SET projeto_selecionado = ? WHERE id = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$projeto,$usuario]);
+
+        try {
+            $stmt->execute([$projeto, $usuario]);
+        } catch (\Throwable $th) {
+            return false;
+        }
+        return true;
     }
 
     public function verificar_email(string $email)

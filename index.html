@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@6.5.95/css/materialdesignicons.min.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bulma-toast/2.4.0/bulma-toast.min.js"
+        integrity="sha512-mmZ7OjPwzgwFPe24uCirB6KvFtUHJqpeHo8cTyWpAvdesiGFRYHDnUKajPt3iWyhaDZ66KTXokBO/Z2kUPTxEw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <style>
         @import './assets/css/background.css';
         @import './assets/css/index.css';
@@ -48,8 +53,21 @@
                                     <span class="is-size-3" id="nome_projeto"></span>
                                 </a>
 
-                                <div class="navbar-dropdown" id="dropdown-projetos">
+                                <div class="navbar-dropdown">
+                                    <div id="dropdown-projetos">
 
+                                    </div>
+                                    <hr class="navbar-divider">
+                                    <a href="./criar_projeto.html" class="navbar-item">
+                                        <span class="icon-text has-text-success-dark">
+                                            <span class="icon">
+                                                <i class="mdi mdi-plus"></i>
+                                            </span>
+                                            <span>
+                                                Criar Projeto
+                                            </span>
+                                        </span>
+                                    </a>
                                 </div>
                             </div>
 
@@ -69,15 +87,15 @@
                             </a>
 
                             <a class="navbar-item item has-text-weight-bold">
-                                <figure class="image is-32x32">
-                                    <img class=" is-rounded " id="foto_usuario" alt="Foto do Usuário">
-                                </figure>
+
                             </a>
 
                             <div class="navbar-item has-dropdown is-hoverable  has-text-weight-bold">
                                 <a class="navbar-link item">
+                                    <figure class="image is-32x32 mr-2">
+                                        <img class=" is-rounded " id="foto_usuario" alt="Foto do Usuário">
+                                    </figure>
                                     <span id="saudacao">Olá, </span>
-
                                 </a>
 
                                 <div class="navbar-dropdown">
@@ -104,9 +122,9 @@
 
                     </div>
                 </div>
+            </header>
         </div>
-        </header>
-        </div>
+
 
         <!-- Hero content: will be in the middle -->
         <div class="hero-body">
@@ -140,22 +158,46 @@
                                         <i class="icon mdi mdi-crown has-text-warning"></i>
                                     </span>
                                 </h1>
-                                <h2 class="subtitle  has-text-left is-size-6" id="email-gerente"> email@email.com</h2>
+                                <h2 class="subtitle  has-text-left is-size-6 info-membro" id="email-gerente">
+                                    email@email.com</h2>
                             </div>
                         </article>
                     </div>
                     <hr>
                     <h1 class="title has-text-left is-size-4">
-                        Membros
+                        <span>Membros</span>
+                        <a class="ml-2 is-medium is-rounded is-inverted" id="botao-adicionar-membro"
+                            onclick="alternarModalAddMembro()">
+                            <span class="icon-text has-text-link-dark has-text-weight-bold">
+                                <span class="icon">
+                                    <i class="mdi mdi-account-plus-outline"></i>
+                                </span>
+                                <span class="">
+                                    Adicionar Membro
+                                </span>
+
+
+                            </span>
+                        </a>
                     </h1>
                     <br>
                     <div class="columns is-multiline" id="membros-projeto">
 
                     </div>
+                    <div class="notification" id="aviso-membros-vazio">
+                        <p class="is-size-4 has-text-weight-bold">
+                            <span class="icon-text">
+                                <span class="icon mr-4">
+                                    <i class="mdi mdi-emoticon-sad-outline"></i>
+                                </span>
+                                <span>
+                                    Seu projeto ainda não possui membros ...
+                                </span>
+                            </span>
+                        </p>
+                    </div>
 
                 </div>
-
-
 
                 <p id="aviso">
                     <span class="title has-text-link-light">
@@ -171,32 +213,112 @@
 
         </div>
 
+        <div class="modal" id="modal-adicionar-membro">
+            <div class="modal-background"></div>
+            <div class="modal-card">
+                <header class="modal-card-head">
+                    <p class="modal-card-title">Adicionar novo membro</p>
+                    <button class="delete" aria-label="close" onclick="alternarModalAddMembro()"></button>
+                </header>
+                <section class="modal-card-body">
 
-        <!-- Hero footer: will stick at the bottom -->
-        <!-- <div class="hero-foot">
-            <nav class="tabs is-boxed is-fullwidth">
-                <div class="container">
-                    <ul>
-                        <li class="is-active"><a>Overview</a></li>
-                        <li><a>Modifiers</a></li>
-                        <li><a>Grid</a></li>
-                        <li><a>Elements</a></li>
-                        <li><a>Components</a></li>
-                        <li><a>Layout</a></li>
-                    </ul>
-                </div>
-            </nav>
-        </div> -->
+                    <form action="" onsubmit="return buscaUsuarioPorEmail(this)">
+                        <label class="label is-size-5" for="email-membro">Insira o e-mail do usuário:</label>
+                        <div class="field has-addons">
+                            <div class="control is-expanded">
+                                <input type="email" required class="input" placeholder="example@email.com"
+                                    list="usuarios" name="email" id="email-membro">
+                            </div>
+
+                            <div class="control">
+                                <button class="button">
+                                    <i class="icon mdi mdi-magnify"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="resultado">
+                        <hr>
+                        <div class="notification is-danger" id="aviso-usuario-nao-encontrado">
+                            <p class="has-text-centered has-text-weight-bold">
+                                <span class="icon-text">
+                                    <span class="icon">
+                                        <i class="mdi mdi-account-multiple-remove-outline"></i>
+                                    </span>
+                                    <span>
+                                        Nenhum usuário encontrado
+                                    </span>
+                                </span>
+                            </p>
+                        </div>
+                        <p class="title is-size-5" id="aviso-usuario-encontrado"> Usuário Encontrado:</p>
+                        <article class="media" id="usuario-encontrado">
+
+                            <figure class="media-left">
+                                <p class="image is-32x32 is-fullwidth">
+                                    <img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png"
+                                        id="foto-resultado">
+                                </p>
+                            </figure>
+                            <div class="media-content">
+                                <h1 class="title has-text-left is-size-7 info-membro" id="nome-resultado">
+                                    Usuário Encontrado
+                                </h1>
+                                <h2 class="subtitle  has-text-left is-size-7 info-membro" id="email-resultado">
+                                    email@email.com</h2>
+                            </div>
+
+                            <div class="media-right mr-2" id="form-item-1">
+                                <form action="" onsubmit="return adicionarMembro(this)" id="form-adicionar-membro">
+                                    <div class="field">
+
+                                        <div class="select is-small">
+                                            <select name="cargo">
+                                                <option value="desenvolvedor">Desenvolvedor</option>
+                                                <option value="design">Design</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="media-right" id="form-item-2">
+                                <button class="button is-small is-success is-fullwidth" form="form-adicionar-membro">
+                                    <span class="has-text-weight-bold">
+                                        Adicionar
+                                    </span>
+                                </button>
+                            </div>
+
+                            <div class="media-right mt-1" id="aviso-eh-membro">
+
+                                <p class="title is-size-6 has-text-dark">Este usuário já é membro do projeto</p>
+
+                            </div>
+
+                        </article>
+                    </div>
+
+                </section>
+            </div>
+
+        </div>
+
     </section>
+
+
 
 </body>
 
 <script>
 
     let usuario = JSON.parse(localStorage.getItem("Usuario"))
+    console.log(usuario)
     let projetos = [];
     let membros = [];
+    let gerente = null;
+    let usuario_encontrado = null;
     let projeto_selecionado;
+
 
     xhttp = new XMLHttpRequest();
     xhttp.onload = function () {
@@ -206,8 +328,9 @@
 
             projetos = resposta.projetos;
             carregarProjetos();
-            getProjetoSelecionado()
-
+            if (usuario.projeto_selecionado != '') {
+                getProjetoSelecionado();
+            }
 
         } else {
             document.getElementById('aviso').style.display = 'block';
@@ -220,28 +343,29 @@
     xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhttp.send();
 
+
+    //Define as informações do usuário logado
     document.getElementById('foto_usuario').src = './' + usuario.foto
     document.getElementById('saudacao').innerText += '     ' + usuario.nome.split(' ')[0]
+
 
     function carregarProjetos() {
 
         const columns = document.getElementById('dropdown-projetos')
 
-        projetos.forEach(projeto => {
-            // console.log(projeto)
-            var item = document.createElement('a')
 
+        projetos.filter(projeto => projeto.id != usuario.projeto_selecionado).forEach(projeto => {
+            // console.log(projeto)
+            const item = document.createElement('a')
             item.classList.add('navbar-item')
 
 
-            var texto = document.createElement('p')
+            const texto = document.createElement('p')
             texto.classList.add('level', 'is-mobile')
 
-
-            var nome = document.createElement('span')
+            const nome = document.createElement('span')
             nome.innerText = projeto.nome
             nome.classList.add('has-text-left', 'level-left')
-
 
             texto.append(nome)
 
@@ -250,7 +374,7 @@
 
             item.addEventListener('click', function a() { selecionarProjeto(item.id) })
 
-            columns.append(item)
+            columns.insertBefore(item, columns.firstChild)
         });
 
     }
@@ -264,6 +388,18 @@
             if (resposta.erro == 0) {
                 projeto_selecionado = resposta.projeto;
                 carregarInformacoesProjeto();
+
+                if (verificarMembro(usuario.email) === false) {
+                    bulmaToast.toast({
+                        message: `Você foi removido do projeto <strong>${projeto_selecionado.nome}</strong>! Redirecionando...`,
+                        type: 'is-danger'
+                    })
+
+                    id = projetos[0].id
+
+                    setTimeout(() => { selecionarProjeto(id) }, 3000);
+                }
+
             }
 
 
@@ -273,7 +409,7 @@
         xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
         dados = new FormData();
-        dados.append('id', 15)
+        dados.append('id', usuario.projeto_selecionado)
 
         xhttp.send(new URLSearchParams(dados).toString());
 
@@ -281,6 +417,34 @@
 
     function selecionarProjeto(id) {
         console.log(id)
+
+        xhttp = new XMLHttpRequest();
+        xhttp.onload = function () {
+            console.log(this.responseText)
+            resposta = JSON.parse(this.responseText);
+
+            if (resposta.erro == 0) {
+
+                usuario.projeto_selecionado = id
+
+                localStorage.setItem('Usuario', JSON.stringify(usuario))
+
+                location.href = './index.html'
+
+            }
+
+        };
+
+        xhttp.open("POST", "./controle/alterarProjetoSelecionado.php", true);
+        xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+        dados = new FormData();
+        dados.append('usuario', usuario.id)
+        dados.append('projeto', id)
+
+        xhttp.send(new URLSearchParams(dados).toString());
+
+
     }
 
     function sair() {
@@ -300,70 +464,263 @@
         document.getElementById('projeto-selecionado').style.display = 'block';
 
         // Alterando informações do projeto
-
         document.getElementById('nome-projeto').innerText = projeto_selecionado.nome
         document.getElementById('resumo-projeto').innerText = projeto_selecionado.resumo
 
-        const gerente = projeto_selecionado.membros.filter(membro => membro.cargo === "gerente")[0]
+        gerente = projeto_selecionado.membros.filter(membro => membro.cargo === "gerente")[0]
+        const membros = projeto_selecionado.membros.filter(membro => membro.cargo !== "gerente")
 
-        // Atribuí as informações do gerente do projeto
+        //Verifica se o usuário é gerente do projeto selecionado
+        if (usuario.id == gerente.id) {
+            document.getElementById('botao-adicionar-membro').style.display = 'inline-flex';
+        }
+
+        // Alterando as informações do gerente do projeto
         document.getElementById('nome-gerente').innerText = gerente.nome
         document.getElementById('email-gerente').innerText = gerente.email
         document.getElementById('foto-gerente').src = gerente.foto
-
 
         console.log(gerente)
 
         const columns = document.getElementById('membros-projeto')
 
-        projeto_selecionado.membros.forEach(membro => {
+        if (membros.length == 0) {
+            document.getElementById('aviso-membros-vazio').style.display = 'block'
+        }
+        else {
+            membros.forEach(membro => {
 
-            console.log(membro)
+                console.log(membro)
 
-            const column = document.createElement('div')
-            column.classList.add('column', 'is-4')
+                const column = document.createElement('div')
+                column.classList.add('column', 'is-4')
 
-            const article = document.createElement('article')
-            article.classList.add('media')
+                const article = document.createElement('article')
+                article.classList.add('media')
 
-            const figure = document.createElement('figure')
-            figure.classList.add('media-left')
+                const figure = document.createElement('figure')
+                figure.classList.add('media-left')
 
-            //image is-64x64 is-fullwidth
+                const pImage = document.createElement('p')
+                pImage.classList.add("image", "is-64x64", "is-fullwidth")
 
-            const pImage = document.createElement('p')
-            pImage.classList.add("image", "is-64x64", "is-fullwidth")
+                const img = document.createElement('img')
+                img.classList.add('is-rounded', 'foto-membro')
+                img.src = membro.foto
 
-            const img = document.createElement('img')
-            img.classList.add('is-rounded')
-            img.src = membro.foto
+                const content = document.createElement('div')
+                content.classList.add('media-content')
 
-            const content = document.createElement('div')
-            content.classList.add('media-content')
+                const nomeMembro = document.createElement('h1')
+                nomeMembro.classList.add('title', 'has-text-left', 'is-size-5', 'info-membro')
+                nomeMembro.innerText = membro.nome
 
-            const nomeMembro = document.createElement('h1')
-            nomeMembro.classList.add('title', 'has-text-left', 'is-size-5')
-            nomeMembro.innerText = membro.nome
+                const emailMembro = document.createElement('h2')
+                emailMembro.classList.add('subtitle', 'has-text-left', 'is-size-6', 'info-membro')
+                emailMembro.innerHTML = `${membro.email}<br>${membro.cargo}`
 
-            const emailMembro = document.createElement('h2')
-            emailMembro.classList.add('subtitle', 'has-text-left', 'is-size-6')
-            emailMembro.innerText = membro.email
+                columns.append(column)
+                column.append(article)
 
+                article.append(figure)
+                figure.append(pImage)
+                pImage.append(img)
 
-            columns.append(column)
-            column.append(article)
-
-            article.append(figure)
-            figure.append(pImage)
-            pImage.append(img)
-
-            article.append(content)
-            content.append(nomeMembro)
-            content.append(emailMembro)
-
-        })
+                article.append(content)
+                content.append(nomeMembro)
+                content.append(emailMembro)
 
 
+                if (usuario.id == gerente.id) {
+
+                    const rightContent = document.createElement('div')
+                    rightContent.classList.add('media-right', 'has-text-centered')
+
+                    const botaoRemover = document.createElement('button')
+                    botaoRemover.classList.add('button', 'is-medium', 'is-rounded', 'is-danger', 'mr-1', 'mt-1')
+                    botaoRemover.ariaLabel = "botão remover"
+
+                    botaoRemover.addEventListener('click', function a() { removerMembro(membro) })
+
+
+                    const spanIcone = document.createElement('span')
+                    spanIcone.classList.add('icon')
+
+                    const iconeTrash = document.createElement('i')
+                    iconeTrash.classList.add('mdi', 'mdi-account-minus', 'is-medium')
+
+
+                    article.append(rightContent)
+                    rightContent.append(botaoRemover)
+                    botaoRemover.append(spanIcone)
+                    spanIcone.append(iconeTrash)
+                }
+
+            })
+        }
+
+
+    }
+
+    function alternarModalAddMembro() {
+
+        const modal = document.getElementById('modal-adicionar-membro')
+
+        document.getElementById('aviso-usuario-nao-encontrado').style.display = 'none'
+        document.getElementById('aviso-usuario-encontrado').style.display = 'none'
+        document.getElementById('usuario-encontrado').style.display = 'none'
+        document.getElementById('email-membro').value = ''
+
+        usuario_encontrado = null
+
+        if (modal.classList.contains('is-active')) {
+            modal.classList.remove('is-active')
+        } else {
+            modal.classList.add('is-active')
+        }
+    }
+
+    function buscaUsuarioPorEmail(formulario) {
+        try {
+            document.getElementById('aviso-usuario-nao-encontrado').style.display = 'none'
+            document.getElementById('aviso-usuario-encontrado').style.display = 'none'
+            document.getElementById('usuario-encontrado').style.display = 'none'
+
+            xhttp = new XMLHttpRequest();
+            xhttp.onload = function () {
+                console.log(this.responseText)
+                resposta = JSON.parse(this.responseText);
+
+                if (resposta.erro == 0) {
+                    usuario_encontrado = resposta.usuario
+
+                    ehMembro = verificarMembro(usuario_encontrado.email)
+
+                    if (ehMembro) {
+                        document.getElementById('aviso-eh-membro').style.display = 'flex'
+                        document.getElementById('form-item-1').style.display = 'none'
+                        document.getElementById('form-item-2').style.display = 'none'
+
+                    } else {
+                        document.getElementById('aviso-eh-membro').style.display = 'none'
+                        document.getElementById('form-item-1').style.display = 'flex'
+                        document.getElementById('form-item-2').style.display = 'flex'
+                    }
+
+                    document.getElementById('usuario-encontrado').style.display = 'flex'
+                    document.getElementById('aviso-usuario-encontrado').style.display = 'flex'
+
+                    document.getElementById('nome-resultado').innerText = usuario_encontrado.nome
+                    document.getElementById('email-resultado').innerText = usuario_encontrado.email
+                    document.getElementById('foto-resultado').src = usuario_encontrado.foto
+
+
+
+                }
+
+                else {
+                    document.getElementById('aviso-usuario-nao-encontrado').style.display = 'flex'
+                }
+            };
+
+            xhttp.open("POST", "./controle/getUsuarioPorEmail.php", true);
+            xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+            dados = new FormData(formulario);
+
+            xhttp.send(new URLSearchParams(dados).toString());
+
+            return false;
+
+        } catch (error) {
+            console.log(error)
+            return false;
+        }
+    }
+
+    function verificarMembro(email) {
+
+        return projeto_selecionado.membros.filter(membro => membro.email == email).length > 0
+
+
+    }
+
+    function adicionarMembro(formulario) {
+        try {
+            xhttp = new XMLHttpRequest();
+            xhttp.onload = function () {
+                console.log(this.responseText)
+                resposta = JSON.parse(this.responseText);
+
+                if (resposta.erro == 0) {
+                    bulmaToast.toast({
+                        message: `Usuário <strong>${usuario_encontrado.nome}</strong> foi adicionado como membro do projeto ${projeto_selecionado.nome}!`,
+                        type: 'is-success'
+                    })
+
+                    setTimeout(function () {
+
+                        location.href = './index.html'
+
+                    }, 2000)
+                }
+
+            };
+
+            xhttp.open("POST", "./controle/adicionarMembro.php", true);
+            xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+            dados = new FormData(formulario);
+            dados.append('id_usuario', usuario_encontrado.id)
+            dados.append('id_projeto', projeto_selecionado.id)
+
+            xhttp.send(new URLSearchParams(dados).toString());
+
+            return false;
+
+        } catch (error) {
+            console.log(error)
+            return false;
+        }
+    }
+
+    function removerMembro(membro) {
+        try {
+            xhttp = new XMLHttpRequest();
+            xhttp.onload = function () {
+                console.log(this.responseText)
+                resposta = JSON.parse(this.responseText);
+
+                if (resposta.erro == 0) {
+                    bulmaToast.toast({
+                        message: `Membro <strong>${membro.nome}</strong> foi removido do projeto <strong>${projeto_selecionado.nome}</strong>!`,
+                        type: 'is-danger'
+                    })
+
+                    setTimeout(function () {
+
+                        location.href = './index.html'
+
+                    }, 2000)
+                }
+
+            };
+
+            xhttp.open("POST", "./controle/removerMembro.php", true);
+            xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+            dados = new FormData();
+            dados.append('id_usuario', membro.id)
+            dados.append('id_projeto', projeto_selecionado.id)
+
+            xhttp.send(new URLSearchParams(dados).toString());
+
+            return false;
+
+        } catch (error) {
+            console.log(error)
+            return false;
+        }
     }
 
 
