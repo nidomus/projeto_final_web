@@ -14,7 +14,7 @@ O sistema Sprint King tem como proposta apresentar uma alternativa de um aplicat
 <li>Mysql;</li>
 <li>Javascript;</li>
 <li>Bulma.</li>
-</ol>
+</ul>
 
 <h1>Requisitos</h1>
 
