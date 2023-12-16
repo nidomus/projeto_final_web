@@ -41,11 +41,11 @@ Todo:
 
     [OK] Modal de confirmação para exclusão de membro;
  
-    [] Subir versão final para a hospedagem;
+    [OK] Subir versão final para a hospedagem;
 
     [OK] Elaborar Documento de Requisitos;
 
-    [] Elaborar Tutorial;
+    [OK] Elaborar Tutorial;
 
 
     - Opcional -
