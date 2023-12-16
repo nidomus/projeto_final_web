@@ -1,19 +1,15 @@
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"] . "/projeto_final_web/modelo/Projeto.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "/projeto_final_web/modelo/Membro.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/projeto_final_web/persistencia/Conexao.php";
+
 class projetoBD
 {
     private $pdo;
 
     public function __construct()
     {
-        $host = "localhost";//getenv('MYSQL_HOST');
-        $dbName = "projeto_final";//getenv('MYSQL_DATABASE');
-        $user = "root";//getenv('MYSQL_USER');
-        $pass = "";//getenv('MYSQL_PASSWORD');
-
-        $dsn = "mysql:host=$host;dbname=$dbName";
-        $this->pdo = new PDO($dsn, $user, $pass);
+        $this->pdo = Conexao::getConexao();
     }
 
     public function getProjetosPorEmail(string $email)
@@ -74,7 +70,6 @@ class projetoBD
         $stmt = $this->pdo->prepare($sql);
 
         $stmt->execute([$id, $projeto->getNome(), $projeto->getResumo()]);
-
         return $stmt->fetch()['var_id_projeto'];
 
 

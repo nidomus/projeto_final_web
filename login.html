@@ -2,7 +2,9 @@
 <html lang="en">
 
 <head>
-  <title>Acesso à página</title>
+  <title>Log-in</title>
+
+  <link rel="icon" type="image/x-icon" href="./assets/imagens/crown.ico">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
@@ -27,66 +29,74 @@
 
 <body>
 
-
   <section class="hero is-fullheight">
-    <div class="hero-body ">
+    <div class="hero-body">
       <div class="container has-text-centered">
-
-        <div class="column is-4  is-offset-4 is-offset-0-touch" id="login_box">
-
-          <div class="box p-6">
-            <p class="title has-text-centered mb-0 is-size-2 icon-text">
-
-              <span>Sprint King</span>
-              <i class="icon mdi mdi-crown has-text-warning"></i>
-
+        <div class="columns is-centered">
+          <div class="column is-5-desktop is-8-tablet is-12-mobile" id="login_box">
+            <p class="title has-text-centered mb-0 is-size-1 icon-text">
+              <span class="has-text-light pl-1">Sprint King</span>
+              <span class="icon">
+                <i class="mdi mdi-crown has-text-warning pt-5"></i>
+              </span>
             </p>
-            <hr>
-            <form action="#" id="formLogin" onsubmit="return autenticar(this)">
-              <div class="field">
-                <!-- <label class="label has-text-left" for="email">Email:</label> -->
-                <div class="control">
-                  <input type="email" required class="input is-medium is-rounded" id="email" placeholder="Email"
-                    name="email">
-                </div>
-              </div>
-
-              <div class="field pt-3">
-                <!-- <label class="label has-text-left" for="senha">Senha:</label> -->
-                <div class="control">
-                  <input type="password" required class="input is-medium is-rounded" id="senha" placeholder="Senha"
-                    name="senha">
-                </div>
-              </div>
-              <p class="help"></p>
-              <br>
-              <button type="submit" class="submit-button button is-fullwidth is-rounded is-primary is-medium">
-                <span class="icon-text">
-                  <span class="icon"><i class="mdi mdi-login"></i></span>
-                  <span>Entrar</span>
-                </span>
-
-              </button>
-              <br>
-              <div class="columns is-multiline">
-                <div class="column is-6 is-12-touch">
-
-                  <a href="./cadastrar.html">Criar nova conta</a>
-                </div>
-                <div class="column is-6 is-12-touch">
-
-                  <a href="">Esqueci minha senha</a>
-
+            <br>
+            <br>
+            <br>
+            <div class="box pt-5 pb-6 pl-6 pr-6">
+              <p class="title has-text-centered mb-2">Faça seu Login</p>
+              <hr>
+              <form action="#" id="formLogin" onsubmit="return autenticar(this)">
+                <div class="field">
+                  <div class="control">
+                    <input type="email" aria-label="Insira seu e-mail" required class="input is-medium" id="email"
+                      placeholder="E-mail" name="email">
+                    </span>
+                  </div>
                 </div>
 
-              </div>
-            </form>
+                <div class="field pt-3">
+                  <div class="control has-icons-right ">
+                    <input type="password" aria-label="Insira sua senha" required class="input is-medium " id="senha"
+                      placeholder="Senha" name="senha">
+
+
+                    <span class="icon is-medium is-right is-clickable" id="alterna-senha" onclick="alternaSenha()">
+                      <i class="mdi mdi-eye-off" id="eye-icon"></i>
+                    </span>
+
+                  </div>
+                </div>
+                <p class="help is-danger is-size-6 pt-1" id="texto-ajuda"></p>
+                <br>
+                <button type="submit" class="submit-button button is-fullwidth is-primary is-medium">
+                  <span class="icon-text">
+                    <span class="icon"><i class="mdi mdi-login"></i></span>
+                    <span>Entrar</span>
+                  </span>
+
+                </button>
+                <br>
+                <div class="columns is-multiline">
+                  <div class="column is-6 is-12-touch">
+
+                    <a href="./cadastrar.html">Criar nova conta</a>
+                  </div>
+                  <div class="column is-6 is-12-touch">
+
+                    <a href="">Esqueci minha senha</a>
+
+                  </div>
+
+                </div>
+              </form>
+            </div>
           </div>
         </div>
 
       </div>
     </div>
-    <div class="head-foot has-text-centered mb-6">
+    <div class="hero-foot has-text-centered mb-6">
       <a href="https://github.com/nidomus/projeto_final_web" target=”_blank”>
         <i class=" mdi mdi-github has-text-light is-size-1"></i>
       </a>
@@ -109,10 +119,8 @@
           location.href = './index.html';
         }
         else {
-          bulmaToast.toast({
-            message: 'E-mail ou senha incorretos!',
-            type: 'is-danger'
-          })
+
+          document.getElementById('texto-ajuda').innerText = "E-mail ou Senha incorretos!"
         }
       };
       xhttp.open("POST", "./controle/autenticar.php", true);
@@ -124,14 +132,25 @@
 
     }
 
-    function alternarFormulario() {
+    function alternaSenha() {
 
-      var innerInfo = document.getElementById('info-inner')
+      var eyeIcon = document.getElementById('eye-icon')
+      var inputSenha = document.getElementById('senha')
 
-      if (innerInfo.classList.contains('rotate')) {
-        innerInfo.classList.remove('rotate')
+
+
+      if (eyeIcon.classList.contains('mdi-eye')) {
+
+        eyeIcon.classList.remove('mdi-eye')
+        eyeIcon.classList.add('mdi-eye-off')
+
+        document.getElementById('senha').type = 'password'
+
       } else {
-        innerInfo.classList.add('rotate')
+        eyeIcon.classList.add('mdi-eye')
+        eyeIcon.classList.remove('mdi-eye-off')
+
+        document.getElementById('senha').type = 'text'
       }
 
 

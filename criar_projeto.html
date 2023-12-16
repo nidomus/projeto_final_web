@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@6.5.95/css/materialdesignicons.min.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="icon" type="image/x-icon" href="./assets/imagens/crown.ico">
+    <title>Criar projeto</title>
     <style>
         @import './assets/css/background.css';
         @import './assets/css/index.css';
@@ -36,13 +37,15 @@
 
                             </p>
                         </a>
-                        <span class="navbar-burger" data-target="navbarMenuHeroC">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </span>
+                        <a role="button" class="navbar-burger has-text-grey-light" aria-label="menu"
+                            aria-expanded="false" data-target="navbar" onclick="alternarNavbarBurger()"
+                            id="navbar-burger">
+                            <span aria-hidden="true"></span>
+                            <span aria-hidden="true"></span>
+                            <span aria-hidden="true"></span>
+                        </a>
                     </div>
-                    <div id="navbarMenuHeroC" class="navbar-menu">
+                    <div id="navbar" class="navbar-menu">
                         <hr class="navbar-divider">
 
                         <div class="navbar-end">
@@ -61,7 +64,8 @@
 
                             </a>
 
-                            <div class="navbar-item has-dropdown is-hoverable  has-text-weight-bold">
+                            <div class="navbar-item has-dropdown is-hoverable  has-text-weight-bold"
+                                id="dropdown-perfil">
                                 <a class="navbar-link item">
                                     <figure class="image is-32x32 mr-2">
                                         <img class=" is-rounded " id="foto_usuario" alt="Foto do Usuário">
@@ -88,6 +92,21 @@
                             </div>
 
 
+                            <a class="navbar-item item has-text-weight-bold" id="navbar-meu-perfil">
+                                Meu Perfil
+                            </a>
+                            <a class="navbar-item item has-text-weight-bold" id="navbar-notificacoes">
+                                Notificações
+                            </a>
+
+                            <a class="navbar-item item has-text-weight-bold" onclick="sair()" id="navbar-sair">
+                                <span class="icon-text has-text-danger">
+                                    <span>Sair</span>
+                                    <i class="icon mdi mdi-exit-to-app"></i>
+                                </span>
+                            </a>
+
+
                         </div>
 
 
@@ -100,18 +119,19 @@
         <div class="hero-body">
             <div class="container has-text-centered">
 
-                <div class="column is-6 pt-0 mt-0 is-offset-3 is-offset-0-touch" id="login_box">
+                <div class="column is-6 p-0 mt-0 is-offset-3 is-offset-0-touch" id="login_box">
                     <div class="box p-6 ml-3 mr-3">
 
 
-                        <p class="title has-text-centered has-text-dark mb-5" id="saudacao">CRIAR NOVO PROJETO</p>
+                        <p class="title has-text-centered has-text-dark mb-5" id="saudacao">PROJETO NOVO</p>
                         <hr class="mt-0">
 
                         <form action="" onsubmit="return criarProjeto(this)">
 
                             <div class="field">
 
-                                <label for="nome" class="label has-text-left">Nome do Projeto:</label>
+                                <label for="nome" class="label has-text-left is-medium">Informe um nome para o
+                                    Projeto</label>
                                 <div class="control">
 
                                     <input type="text" required name="nome" id='nome' class="input is-medium">
@@ -119,12 +139,12 @@
 
                             </div>
 
+                            <br>
                             <div class="field">
-
-                                <label for="nome" class="label has-text-left">Resumo (Opcional):</label>
+                                <label for="resumo" class="label has-text-left is-medium">Resumo do Projeto</label>
                                 <div class="control">
 
-                                    <textarea type="textarea" name="resumo" id='resumo'
+                                    <textarea type="textarea" required name="resumo" id='resumo'
                                         class="textarea is-medium"></textarea>
                                 </div>
 
@@ -166,7 +186,7 @@
 
     let usuario = JSON.parse(localStorage.getItem("Usuario"))
 
-    document.getElementById('foto_usuario').src = './' + usuario.foto
+    document.getElementById('foto_usuario').src = './../' + usuario.foto
     document.getElementById('saudacao').innerText += '     ' + usuario.nome.split(' ')[0]
 
     function criarProjeto(formulario) {
@@ -181,6 +201,8 @@
                 if (resposta.erro == 0) {
 
                     usuario.projeto_selecionado = resposta.id_projeto
+
+                    console.log(resposta.id_projeto)
 
                     localStorage.setItem('Usuario', JSON.stringify(usuario))
 
@@ -215,6 +237,36 @@
         xhttp.open("GET", "./controle/sair.php", true);
         xhttp.send();
         location.href = './login.html';
+    }
+
+    function alternarNavbarBurger() {
+
+        if (!document.getElementById('navbar-burger').classList.contains('is-active')) {
+
+            document.getElementById('navbar-burger').classList.add('is-active')
+            document.getElementById('navbar').classList.add('is-active')
+            document.getElementById('navbar').style.backgroundColor = 'black !important'
+
+            document.getElementById('navbar-meu-perfil').style.display = 'flex';
+            document.getElementById('navbar-notificacoes').style.display = 'flex';
+            document.getElementById('navbar-sair').style.display = 'flex';
+
+            document.getElementById('dropdown-perfil').style.display = 'none';
+
+
+        } else {
+
+            document.getElementById('navbar-burger').classList.remove('is-active')
+            document.getElementById('navbar').classList.remove('is-active')
+
+            document.getElementById('navbar-meu-perfil').style.display = 'none';
+            document.getElementById('navbar-notificacoes').style.display = 'none';
+            document.getElementById('navbar-sair').style.display = 'none';
+
+            document.getElementById('dropdown-perfil').style.display = 'flex';
+        }
+
+
     }
 
 </script>

@@ -1,6 +1,7 @@
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"] . "/projeto_final_web/modelo/Projeto.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "/projeto_final_web/modelo/Membro.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/projeto_final_web/persistencia/Conexao.php";
 
 class MembroBD
 {
@@ -8,13 +9,7 @@ class MembroBD
 
     public function __construct()
     {
-        $host = "localhost";//getenv('MYSQL_HOST');
-        $dbName = "projeto_final";//getenv('MYSQL_DATABASE');
-        $user = "root";//getenv('MYSQL_USER');
-        $pass = "";//getenv('MYSQL_PASSWORD');
-
-        $dsn = "mysql:host=$host;dbname=$dbName";
-        $this->pdo = new PDO($dsn, $user, $pass);
+        $this->pdo = Conexao::getConexao();
     }
 
     public function salvar($id_projeto, $id_usuario, $cargo)

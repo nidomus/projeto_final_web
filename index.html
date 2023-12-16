@@ -6,8 +6,10 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@6.5.95/css/materialdesignicons.min.css" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="icon" type="image/x-icon" href="./assets/imagens/crown.ico">
+    <title>Sprint King</title>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bulma-toast/2.4.0/bulma-toast.min.js"
         integrity="sha512-mmZ7OjPwzgwFPe24uCirB6KvFtUHJqpeHo8cTyWpAvdesiGFRYHDnUKajPt3iWyhaDZ66KTXokBO/Z2kUPTxEw=="
@@ -28,10 +30,10 @@
 
     <section class="hero is-fullheight">
         <!-- Hero head: will stick at the top -->
-        <div class="hero-head ">
-            <header class="navbar is-transparent">
+        <div class="hero-head">
+            <nav class="navbar is-transparent">
                 <div class="container">
-                    <div class="navbar-brand mt-3 mb-3">
+                    <div class="navbar-brand">
                         <a class="navbar-item">
                             <p class="title has-text-centered has-text-white mb-0 is-size-2 icon-text">
                                 <span>Sprint King</span>
@@ -39,13 +41,15 @@
 
                             </p>
                         </a>
-                        <span class="navbar-burger" data-target="navbarMenuHeroC">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </span>
+                        <a role="button" class="navbar-burger has-text-grey-light" aria-label="menu"
+                            aria-expanded="false" data-target="navbar" onclick="alternarNavbarBurger()"
+                            id="navbar-burger">
+                            <span aria-hidden="true"></span>
+                            <span aria-hidden="true"></span>
+                            <span aria-hidden="true"></span>
+                        </a>
                     </div>
-                    <div id="navbarMenuHeroC" class="navbar-menu">
+                    <div id="navbar" class="navbar-menu">
                         <hr class="navbar-divider">
                         <div class="navbar-start">
                             <div class="navbar-item has-dropdown is-hoverable  has-text-weight-bold" id="projetos">
@@ -59,10 +63,8 @@
                                     </div>
                                     <hr class="navbar-divider">
                                     <a href="./criar_projeto.html" class="navbar-item">
-                                        <span class="icon-text has-text-success-dark">
-                                            <span class="icon">
-                                                <i class="mdi mdi-plus"></i>
-                                            </span>
+                                        <span class="icon-text has-text-success-dark has-text-weight-bold">
+
                                             <span>
                                                 Criar Projeto
                                             </span>
@@ -70,7 +72,6 @@
                                     </a>
                                 </div>
                             </div>
-
                         </div>
 
 
@@ -90,7 +91,8 @@
 
                             </a>
 
-                            <div class="navbar-item has-dropdown is-hoverable  has-text-weight-bold">
+                            <div class="navbar-item has-dropdown is-hoverable  has-text-weight-bold"
+                                id="dropdown-perfil">
                                 <a class="navbar-link item">
                                     <figure class="image is-32x32 mr-2">
                                         <img class=" is-rounded " id="foto_usuario" alt="Foto do Usuário">
@@ -110,19 +112,31 @@
                                         <span class="icon-text has-text-danger">
                                             <span>Sair</span>
                                             <i class="icon mdi mdi-exit-to-app"></i>
-
                                         </span>
                                     </a>
                                 </div>
                             </div>
 
+                            <a class="navbar-item item has-text-weight-bold" id="navbar-meu-perfil">
+                                Meu Perfil
+                            </a>
+                            <a class="navbar-item item has-text-weight-bold" id="navbar-notificacoes">
+                                Notificações
+                            </a>
+
+                            <a class="navbar-item item has-text-weight-bold" onclick="sair()" id="navbar-sair">
+                                <span class="icon-text has-text-danger">
+                                    <span>Sair</span>
+                                    <i class="icon mdi mdi-exit-to-app"></i>
+                                </span>
+                            </a>
 
                         </div>
 
 
                     </div>
                 </div>
-            </header>
+            </nav>
         </div>
 
 
@@ -164,11 +178,11 @@
                         </article>
                     </div>
                     <hr>
-                    <h1 class="title has-text-left is-size-4">
+                    <h1 class="title has-text-left is-size-4 is-size-5-touch">
                         <span>Membros</span>
                         <a class="ml-2 is-medium is-rounded is-inverted" id="botao-adicionar-membro"
                             onclick="alternarModalAddMembro()">
-                            <span class="icon-text has-text-link-dark has-text-weight-bold">
+                            <span class="icon-text is-size-6-touch has-text-link-dark has-text-weight-bold">
                                 <span class="icon">
                                     <i class="mdi mdi-account-plus-outline"></i>
                                 </span>
@@ -185,15 +199,12 @@
 
                     </div>
                     <div class="notification" id="aviso-membros-vazio">
-                        <p class="is-size-4 has-text-weight-bold">
-                            <span class="icon-text">
-                                <span class="icon mr-4">
-                                    <i class="mdi mdi-emoticon-sad-outline"></i>
-                                </span>
-                                <span>
-                                    Seu projeto ainda não possui membros ...
-                                </span>
+                        <p class="is-size-4 is-size-6-touch has-text-centered has-text-weight-bold">
+
+                            <span>
+                                Seu projeto ainda não possui membros ...
                             </span>
+
                         </p>
                     </div>
 
@@ -253,7 +264,6 @@
                         </div>
                         <p class="title is-size-5" id="aviso-usuario-encontrado"> Usuário Encontrado:</p>
                         <article class="media" id="usuario-encontrado">
-
                             <figure class="media-left">
                                 <p class="image is-32x32 is-fullwidth">
                                     <img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png"
@@ -303,6 +313,37 @@
 
         </div>
 
+        <div class="modal" id="modal-remover-membro">
+            <div class="modal-background"></div>
+            <div class="modal-content">
+                <div class="box p-6">
+                    <p class="subtitle is-size-3">
+                        Deseja remover o membro <span class="has-text-weight-bold" id="nome-membro-remover"></span>
+                        do projeto <span class="has-text-weight-bold" id="nome-projeto-remover"></span>?
+                    </p>
+                    <hr>
+                    <div class="columns">
+
+                        <div class="column is-6">
+                            <button class="button is-fullwidth is-danger has-text-weight-bold"
+                                onclick="alternarModalRemoverMembro()">
+                                Não
+                            </button>
+                        </div>
+
+                        <div class="column is-6">
+                            <button class="button is-fullwidth is-success has-text-weight-bold" id="botao-remover-sim">
+                                Sim
+                            </button>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
     </section>
 
 
@@ -328,8 +369,18 @@
 
             projetos = resposta.projetos;
             carregarProjetos();
-            if (usuario.projeto_selecionado != '') {
+            if (usuario.projeto_selecionado !== '') {
                 getProjetoSelecionado();
+
+            } else if (projetos.length > 0) {
+
+                // Caso o usuário não tenha nenhum projeto selecionado,
+                // mas seja membro de um projeto, o redireciona para a página
+                // do projeto existente.
+
+                id = projetos[0].id
+
+                selecionarProjeto(id);
             }
 
         } else {
@@ -345,7 +396,7 @@
 
 
     //Define as informações do usuário logado
-    document.getElementById('foto_usuario').src = './' + usuario.foto
+    document.getElementById('foto_usuario').src = './../' + usuario.foto
     document.getElementById('saudacao').innerText += '     ' + usuario.nome.split(' ')[0]
 
 
@@ -392,14 +443,13 @@
                 if (verificarMembro(usuario.email) === false) {
                     bulmaToast.toast({
                         message: `Você foi removido do projeto <strong>${projeto_selecionado.nome}</strong>! Redirecionando...`,
-                        type: 'is-danger'
+                        type: 'is-danger is-light'
                     })
 
                     id = projetos[0].id
 
                     setTimeout(() => { selecionarProjeto(id) }, 3000);
                 }
-
             }
 
 
@@ -478,7 +528,7 @@
         // Alterando as informações do gerente do projeto
         document.getElementById('nome-gerente').innerText = gerente.nome
         document.getElementById('email-gerente').innerText = gerente.email
-        document.getElementById('foto-gerente').src = gerente.foto
+        document.getElementById('foto-gerente').src = './../' + gerente.foto
 
         console.log(gerente)
 
@@ -506,7 +556,7 @@
 
                 const img = document.createElement('img')
                 img.classList.add('is-rounded', 'foto-membro')
-                img.src = membro.foto
+                img.src = "./../" + membro.foto
 
                 const content = document.createElement('div')
                 content.classList.add('media-content')
@@ -516,7 +566,7 @@
                 nomeMembro.innerText = membro.nome
 
                 const emailMembro = document.createElement('h2')
-                emailMembro.classList.add('subtitle', 'has-text-left', 'is-size-6', 'info-membro')
+                emailMembro.classList.add('subtitle', 'has-text-left', 'is-size-6', 'mb-2', 'info-membro')
                 emailMembro.innerHTML = `${membro.email}<br>${membro.cargo}`
 
                 columns.append(column)
@@ -533,27 +583,30 @@
 
                 if (usuario.id == gerente.id) {
 
-                    const rightContent = document.createElement('div')
-                    rightContent.classList.add('media-right', 'has-text-centered')
+                    // const rightContent = document.createElement('div')
+                    // rightContent.classList.add('media-right', 'has-text-centered')
+                    const remover = document.createElement('h2')
+                    remover.classList.add('subtitle', 'has-text-left', 'is-size-6', 'mt-0', 'info-membro')
 
-                    const botaoRemover = document.createElement('button')
-                    botaoRemover.classList.add('button', 'is-medium', 'is-rounded', 'is-danger', 'mr-1', 'mt-1')
-                    botaoRemover.ariaLabel = "botão remover"
-
-                    botaoRemover.addEventListener('click', function a() { removerMembro(membro) })
+                    const botaoRemover = document.createElement('a')
+                    botaoRemover.classList.add('has-text-danger', 'has-text-left')
+                    botaoRemover.ariaLabel = "botão remover membro"
 
 
-                    const spanIcone = document.createElement('span')
-                    spanIcone.classList.add('icon')
+                    botaoRemover.addEventListener('click', function a() { alternarModalRemoverMembro(membro) })
+
+
+                    const span = document.createElement('span')
+                    span.classList.add('has-text-left')
+                    span.innerText = 'Remover Membro'
 
                     const iconeTrash = document.createElement('i')
-                    iconeTrash.classList.add('mdi', 'mdi-account-minus', 'is-medium')
+                    iconeTrash.classList.add('mdi', 'mdi-account-minus')
 
-
-                    article.append(rightContent)
-                    rightContent.append(botaoRemover)
-                    botaoRemover.append(spanIcone)
-                    spanIcone.append(iconeTrash)
+                    content.append(remover)
+                    remover.append(botaoRemover)
+                    botaoRemover.append(span)
+                    // spanIcone.append(iconeTrash)
                 }
 
             })
@@ -612,7 +665,7 @@
 
                     document.getElementById('nome-resultado').innerText = usuario_encontrado.nome
                     document.getElementById('email-resultado').innerText = usuario_encontrado.email
-                    document.getElementById('foto-resultado').src = usuario_encontrado.foto
+                    document.getElementById('foto-resultado').src = './../' + usuario_encontrado.foto
 
 
 
@@ -654,8 +707,8 @@
 
                 if (resposta.erro == 0) {
                     bulmaToast.toast({
-                        message: `Usuário <strong>${usuario_encontrado.nome}</strong> foi adicionado como membro do projeto ${projeto_selecionado.nome}!`,
-                        type: 'is-success'
+                        message: `Usuário <strong>${usuario_encontrado.nome}</strong> foi adicionado como membro do projeto <strong>${projeto_selecionado.nome}</strong>!`,
+                        type: 'is-success is-light'
                     })
 
                     setTimeout(function () {
@@ -684,6 +737,27 @@
         }
     }
 
+    function alternarModalRemoverMembro(membro) {
+
+        const modal = document.getElementById('modal-remover-membro')
+
+        if (modal.classList.contains('is-active')) {
+            modal.classList.remove('is-active')
+        } else {
+
+            botao = document.getElementById('botao-remover-sim')
+
+            botao.addEventListener('click', function a() { removerMembro(membro) })
+
+            document.getElementById('nome-membro-remover').innerText = membro.nome
+            document.getElementById('nome-projeto-remover').innerText = projeto_selecionado.nome
+
+
+            modal.classList.add('is-active')
+        }
+
+    }
+
     function removerMembro(membro) {
         try {
             xhttp = new XMLHttpRequest();
@@ -694,11 +768,10 @@
                 if (resposta.erro == 0) {
                     bulmaToast.toast({
                         message: `Membro <strong>${membro.nome}</strong> foi removido do projeto <strong>${projeto_selecionado.nome}</strong>!`,
-                        type: 'is-danger'
+                        type: 'is-danger is-light'
                     })
 
                     setTimeout(function () {
-
                         location.href = './index.html'
 
                     }, 2000)
@@ -721,6 +794,36 @@
             console.log(error)
             return false;
         }
+    }
+
+    function alternarNavbarBurger() {
+
+        if (!document.getElementById('navbar-burger').classList.contains('is-active')) {
+
+            document.getElementById('navbar-burger').classList.add('is-active')
+            document.getElementById('navbar').classList.add('is-active')
+
+            document.getElementById('navbar-meu-perfil').style.display = 'flex';
+            document.getElementById('navbar-notificacoes').style.display = 'flex';
+            document.getElementById('navbar-sair').style.display = 'flex';
+
+            document.getElementById('dropdown-perfil').style.display = 'none';
+
+
+
+        } else {
+
+            document.getElementById('navbar-burger').classList.remove('is-active')
+            document.getElementById('navbar').classList.remove('is-active')
+
+            document.getElementById('navbar-meu-perfil').style.display = 'none';
+            document.getElementById('navbar-notificacoes').style.display = 'none';
+            document.getElementById('navbar-sair').style.display = 'none';
+
+            document.getElementById('dropdown-perfil').style.display = 'flex';
+        }
+
+
     }
 
 

@@ -1,20 +1,15 @@
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"] . "/projeto_final_web/modelo/Usuario.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/projeto_final_web/persistencia/Conexao.php";
+
 class UsuarioBD
 {
     private $pdo;
 
     public function __construct()
     {
-        $host = "localhost";//getenv('MYSQL_HOST');
-        $dbName = "projeto_final";//getenv('MYSQL_DATABASE');
-        $user = "root";//getenv('MYSQL_USER');
-        $pass = "";//getenv('MYSQL_PASSWORD');
-
-        $dsn = "mysql:host=$host;dbname=$dbName";
-        $this->pdo = new PDO($dsn, $user, $pass);
+        $this->pdo = Conexao::getConexao();
     }
-
     public function salvar(Usuario $usuario)
     {
         $sql = "INSERT INTO usuario (nome, email, password, foto) VALUES (?, ?, ?,?)";

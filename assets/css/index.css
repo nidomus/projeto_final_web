@@ -5,7 +5,6 @@
 
 }
 
-
 #foto-gerente {
     border: gold 2px solid;
 }
@@ -14,7 +13,9 @@
     border: #18052b 2px solid;
 }
 
-
+.navbar-dropdown {
+    width: 125%;
+}
 
 .media-content {
     display: inline-block;
@@ -32,6 +33,13 @@
 }
 
 
+#navbar-meu-perfil,
+#navbar-notificacoes,
+#navbar-sair {
+    display: none;
+}
+
+
 
 .info-membro {
     overflow: hidden;
@@ -39,9 +47,34 @@
     text-overflow: ellipsis;
 }
 
+
 #projeto-selecionado {
     display: none;
+    border-radius: 20px;
+
+
 }
+
+@media screen and (max-width: 1023px) {
+
+    .navbar-item,
+    .navbar-link {
+        color: #18052b !important;
+    }
+
+    .box {
+        padding: 20px !important;
+    }
+
+    .hero-body {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        padding-top: 15px !important;
+        padding-bottom: 15px !important;
+    }
+
+}
+
 
 #aviso {
     display: none;
@@ -60,7 +93,8 @@
 .media {
     padding: 20px;
     border-radius: 15px;
-    box-shadow: #18052b 1px 1px 10px;
+    box-shadow: #18052b 1px 1px 5px;
+
 
 }
 

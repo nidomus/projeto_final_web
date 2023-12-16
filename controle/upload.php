@@ -4,10 +4,8 @@
 
 $nome_arquivo = $_POST['nome'];
 
-
-
 /* Choose where to save the uploaded file */
-$location = "./../assets/imagens/usuarios/".$nome_arquivo;
+$location = "./../../fotos_usuarios/".$nome_arquivo;
 
 echo $location;
 

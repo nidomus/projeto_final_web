@@ -8,25 +8,38 @@
     color: white !important;
 }
 
+@media screen and (max-width: 1023px) {
+
+    .box {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+        padding-top: 20px !important;
+        padding-bottom: 20px !important;
+    }
+
+    .hero-body {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+        padding-top: 15px !important;
+        padding-bottom: 15px !important;
+    }
+
+}
 
 .rotate {
     transform: rotateY(180deg);
 }
 
 .info-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
+    max-height: 490px;
     transition: transform 0.8s;
     transform-style: preserve-3d;
 
 }
 
-
 .info {
 
     perspective: 1000px;
-    height: 10rem;
     transition: transform 0.8s;
     backface-visibility: hidden;
 
@@ -36,13 +49,13 @@
 .info-front {
     background-color: white;
     border-radius: 50px;
-    transform: translate(0, -130%);
+    transform: translate(0, 0);
     box-shadow: 0 0 5px 0 gray;
 }
 
 .info-back {
     background-color: white !important;
-    transform: rotateY(180deg) translate(0, -130%);
+    transform: rotateY(180deg) translate(0, -100%);
     border-radius: 50px;
     box-shadow: 0 0 5px 0 gray;
 
@@ -82,8 +95,7 @@
 
 .info-front,
 .info-back {
-    position: absolute;
-    width: 100%;
-    height: 100%;
+    max-height: 490px;
+    position: relative;
     backface-visibility: hidden;
 }

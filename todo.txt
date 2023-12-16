@@ -13,7 +13,7 @@ Requisitos do projeto:
 
     [OK] Utilizar upload e armazenamento de arquivos;
 
-    [] Utilizar interfaces com usuário dentro de padrões de acessibilidade;
+    [OK] Utilizar interfaces com usuário dentro de padrões de acessibilidade;
 
 Artefatos a serem entregues:
 
@@ -25,3 +25,31 @@ Artefatos a serem entregues:
 
 Apresentação dos projetos: 13 e 14 de Dezembro com entrega dos artefatos e 
 explicação da estrutura do projeto.
+
+
+Todo:
+
+    - Para finalizar -
+
+    [OK] Implementar fluxo adicionar projeto quando nenhum está selecionado;
+
+    [OK] Checar acessibilidade dos formulários do site;
+
+    [OK] Renomear o título de cada página;
+
+    [OK] Criar classe de Conexão para centralizar as informações do banco de dados;
+
+    [OK] Modal de confirmação para exclusão de membro;
+ 
+    [] Subir versão final para a hospedagem;
+
+    [OK] Elaborar Documento de Requisitos;
+
+    [] Elaborar Tutorial;
+
+
+    - Opcional -
+
+    [OK] Implementar o navbar-burger;
+
+    [] Implementar mais alguma funcionalidade;

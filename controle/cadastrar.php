@@ -14,10 +14,10 @@ $nome_foto = $randomString . '.' . $extensao_foto;
 
 if($_POST['foto'] !== 'null'){
 
-    $photo_path = "assets/imagens/usuarios/". $nome_foto;
+    $photo_path = "fotos_usuarios/". $nome_foto;
 
 }else{
-    $photo_path = "assets/imagens/usuarios/user_default.jpg" ;
+    $photo_path = "fotos_usuarios/user_default.jpg" ;
     $nome_foto = null;
 }
 

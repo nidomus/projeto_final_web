@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Acesso à página</title>
+
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
@@ -14,131 +14,131 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bulma-toast/2.4.0/bulma-toast.min.js"
     integrity="sha512-mmZ7OjPwzgwFPe24uCirB6KvFtUHJqpeHo8cTyWpAvdesiGFRYHDnUKajPt3iWyhaDZ66KTXokBO/Z2kUPTxEw=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <link rel="icon" type="image/x-icon" href="./assets/imagens/crown.ico">
+  <title>Cadastrar-se</title>
+
 </head>
 
 <body>
-
-
   <section class="hero is-fullheight">
     <div class="hero-body">
       <div class="container has-text-centered">
+        <div class="columns is-centered is-multiline">
+          <div class="column is-5-desktop is-8-tablet is-12-mobile pt-5">
 
-        <div class="info column is-4  is-offset-4 is-offset-0-touch" id="login_box">
+            <p class="title has-text-centered mb-0 is-size-1 icon-text" id="brand">
+              <span class="has-text-light pl-3">Sprint King</span>
+              <span class="icon">
+                <i class="mdi mdi-crown has-text-warning pt-5"></i>
+              </span>
+            </p>
+            <br>
+            <br>
+            <br>
+            <div class="info">
+              <div class="info-inner" id="info-inner">
+                <div class=" info-front">
+                  <div class=" box p-5 pl-6 pr-6">
+                    <p class="title has-text-centered">Cadastrar-se</p>
+                    <hr>
+                    <form action="#" id="formCadastro" onsubmit="return validarDados(this)">
+                      <div class="field">
+                        <div class="control">
+                          <input type="email" required class="input  is-medium is-responsive" id="email"
+                            placeholder="Email" name="email">
+                        </div>
+                      </div>
 
-          <div class="info-inner" id="info-inner">
+                      <div class="field">
+                        <div class="control">
+                          <input type="password" required class="input  is-medium" id="senha1" placeholder="Senha"
+                            name="senha_1">
+                        </div>
+                      </div>
 
-            <div class=" info-front">
-
-              <div class=" box p-6">
-                <p class="title has-text-centered">Cadastrar-se</p>
-                <hr>
-                <form action="#" id="formCadastro" onsubmit="return validarDados(this)">
-                  <div class="field">
-                    <div class="control">
-                      <input type="email" required class="input is-rounded is-medium" id="email" placeholder="Email"
-                        name="email">
-                    </div>
-                  </div>
-
-                  <div class="field">
-                    <div class="control">
-                      <input type="password" required class="input is-rounded is-medium" id="senha1" placeholder="Senha"
-                        name="senha_1">
-                    </div>
-                  </div>
-
-                  <div class="field">
-                    <div class="control">
-                      <input type="password" required class="input is-rounded is-medium" id="senha2"
-                        placeholder="Repita sua senha" name="senha_2">
-                    </div>
-                  </div>
-                  <p class="help is-danger is-size-6" id="texto_ajuda"></p>
-                  <br>
-                  <button type="submit" class="submit-button button is-fullwidth is-rounded is-medium">
-                    <span class="icon-text">
-                      <span class="icon mdi mdi-skip-forward"></span>
-                      <span>Continuar</span>
-                    </span>
-                  </button>
-                  <br>
-                  <div class="level">
-                    <div class="level-item">
-                      <a href="./login.html">Já tenho uma conta</a>
-                    </div>
-
-                  </div>
-                </form>
-              </div>
-            </div>
-            <div class=" info-back">
-
-              <div class=" box p-6">
-
-                <form action="#" id="formPerfil" onsubmit="return cadastrar(this)">
-
-                  <div class="level">
-                    <div class="level-item">
-                      <figure class="image">
-                        <img class=" is-rounded p-1 " id="foto_usuario" src="./assets/imagens/usuarios/user_default.jpg"
-                          alt="">
-                      </figure>
-                    </div>
-                  </div>
-
-                  <div class="level">
-                    <div class="level-item">
-                      <input type="file" accept=".jpg, .jpeg, .png" class="inputfile" nome="foto"
-                        oninput="alterarFoto(this)" id="foto">
-
-                      <label for="foto">
-                        <span class="text-icon">
-
-                          <i class="icon mdi mdi-camera"></i>
-                          <span>Upload</span>
-
+                      <div class="field">
+                        <div class="control">
+                          <input type="password" required class="input is-medium" id="senha2"
+                            placeholder="Repita sua senha" name="senha_2">
+                        </div>
+                      </div>
+                      <p class="help is-danger is-size-6" id="texto_ajuda"></p>
+                      <br>
+                      <button type="submit" class="submit-button button is-fullwidth is-medium">
+                        <span class="icon-text">
+                          <span>Continuar</span>
+                          <span class="icon mdi mdi-chevron-right"></span>
                         </span>
-                      </label>
+                      </button>
+                      <br>
+                      <div class="level">
+                        <div class="level-item">
+                          <a href="./login.html">Já tenho uma conta</a>
+                        </div>
 
-                    </div>
+                      </div>
+                    </form>
                   </div>
+                </div>
+                <br>
+                <div class=" info-back">
+                  <div class=" box p-5 pl-6 pr-6">
+                    <form action="#" id="formPerfil" onsubmit="return cadastrar(this)">
+                      <div class="level">
+                        <div class="level-item">
+                          <figure class="image">
+                            <img class=" is-rounded p-1 " id="foto_usuario" src="./../fotos_usuarios/user_default.jpg"
+                              alt="">
+                          </figure>
+                        </div>
+                      </div>
 
+                      <div class="level">
+                        <div class="level-item">
+                          <input type="file" accept=".jpg, .jpeg, .png" aria-label="Insira uma foto de perfil"
+                            class="inputfile" nome="foto" oninput="alterarFoto(this)" id="foto">
 
+                          <label for="foto">
+                            <span class="text-icon">
 
-                  <div class="field">
+                              <i class="icon mdi mdi-camera"></i>
+                              <span>Insira uma foto de perfil</span>
 
-                    <div class="control">
-                      <input type="text" class="input is-medium is-rounded has-text-centered" id="nome"
-                        placeholder="Insira seu nome" name="nome">
-                    </div>
+                            </span>
+                          </label>
+
+                        </div>
+                      </div>
+
+                      <div class="field">
+                        <div class="control">
+                          <input type="text" required class="input is-medium has-text-centered" id="nome"
+                            placeholder="Insira seu nome" aria-level="Insira seu nome" name="nome">
+                        </div>
+                      </div>
+                      <br>
+                      <button type="submit" class="submit-button button is-fullwidth is-primary is-medium">
+                        <span class="icon-text">
+                          <span class="icon"><i class="mdi mdi-login"></i></span>
+                          <span>Cadastrar-se</span>
+                        </span>
+
+                      </button>
+                      <br>
+
+                      <a class="has-text-left" onclick="alternarFormulario(this)">Voltar</a>
+
+                    </form>
                   </div>
-
-
-                  <br>
-                  <button type="submit" class="submit-button button is-fullwidth is-rounded is-primary is-medium">
-                    <span class="icon-text">
-                      <span class="icon"><i class="mdi mdi-login"></i></span>
-                      <span>Cadastrar-se</span>
-                    </span>
-
-                  </button>
-                  <br>
-                  <div class="columns is-multiline">
-                    <div class="column is-12 is-12-touch">
-                      <a onclick="alternarFormulario(this)">Voltar</a>
-                    </div>
-
-                  </div>
-                </form>
+                </div>
               </div>
-
-
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="head-foot has-text-centered mb-6">
+    <div class="hero-foot has-text-centered mb-6">
       <a href="https://github.com/nidomus/projeto_final_web" target=”_blank”>
         <i class=" mdi mdi-github has-text-light is-size-1"></i>
       </a>
@@ -147,6 +147,7 @@
       </a>
     </div>
   </section>
+
   <script>
 
     let dados1;
@@ -161,9 +162,8 @@
         console.log(nome_arquivo)
 
         nome_arquivo = nome_arquivo.replace(/(\r\n|\n|\r)/gm, "")
-        uploadFoto(nome_arquivo);
 
-        location.href = './login.html'
+        uploadFoto(nome_arquivo)
 
       };
       xhttp.open("POST", "./controle/cadastrar.php", true);
@@ -186,8 +186,6 @@
 
       return false;
 
-
-
     }
 
     async function uploadFoto(nome) {
@@ -198,7 +196,11 @@
       await fetch('./controle/upload.php', {
         method: "POST",
         body: form
+      }).then(response => {
+        location.href = "./login.html"
       });
+
+      return true;
 
     }
 
@@ -211,8 +213,6 @@
       } else {
         innerInfo.classList.add('rotate')
       }
-
-
     }
 
     function alterarFoto(input) {
